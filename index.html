@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="no" dir="ltr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LAKSEVÅG HVITEVARER - متجر الأجهزة المنزلية</title>
+    <title>LAKSEVÅG HVITEVARER - Din Hvitevarebutikk</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,10 +11,10 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts (Cairo & Inter) -->
+    <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Custom Tailwind Configuration -->
     <script>
@@ -28,7 +28,7 @@
                             200: '#bae6fd',
                             300: '#7dd3fc',
                             400: '#38bdf8',
-                            500: '#57BFEA', // Brand logo color
+                            500: '#57BFEA', // Brand logo primary color
                             600: '#0284c7',
                             700: '#0369a1',
                             dark: '#1e293b'
@@ -36,7 +36,7 @@
                         softbg: '#F8FAFC'
                     },
                     fontFamily: {
-                        sans: ['Cairo', 'Inter', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
@@ -45,11 +45,11 @@
 
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #F8FAFC;
             -webkit-tap-highlight-color: transparent;
         }
-        /* Hide scrollbars for slick mobile feel */
+        /* Hide scrollbars for mobile design */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -57,7 +57,7 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Custom floating badge effect */
+        /* Cart badge bounce animation */
         .cart-badge-bounce {
             animation: bounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -80,11 +80,11 @@
 
             <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center gap-6 font-semibold text-slate-600">
-                <button onclick="switchTab('home')" id="nav-home" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">الرئيسية</button>
-                <button onclick="switchTab('products')" id="nav-products" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">المنتجات والكتالوج</button>
-                <button onclick="switchTab('about')" id="nav-about" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">من نحن</button>
+                <button onclick="switchTab('home')" id="nav-home" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">Hjem</button>
+                <button onclick="switchTab('products')" id="nav-products" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">Produkter</button>
+                <button onclick="switchTab('about')" id="nav-about" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">Om oss</button>
                 <button onclick="switchTab('admin')" id="nav-admin" class="text-amber-600 font-bold bg-amber-50 px-3 py-1 rounded-xl border border-amber-200 hover:bg-amber-100 transition-colors text-xs flex items-center gap-1">
-                    <i class="fa-solid fa-user-shield"></i> لوحة الأدمن
+                    <i class="fa-solid fa-user-shield"></i> Adminpanel
                 </button>
             </nav>
 
@@ -105,20 +105,20 @@
             <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-500 via-brand-400 to-sky-300 text-white p-6 md:p-10 shadow-lg shadow-brand-500/10">
                 <div class="relative z-10 max-w-lg space-y-4">
                     <h1 class="text-2xl md:text-4xl font-extrabold leading-tight">
-                        أفضل الأجهزة المنزلية لمنزلك بأعلى معايير الجودة
+                        Kvalitetshvitevarer til ditt hjem
                     </h1>
                     <p class="text-white/90 text-sm md:text-base font-light">
-                        غسالات، نشافات، ثلاجات وطباخات ممتازة مع ضمان وشحن مباشر في النرويج وخارجها.
+                        Vaskemaskiner, tørketromler, kjøleskap og komfyrer med garanti og pålitelig levering i Norge.
                     </p>
                     <div class="pt-2 flex flex-wrap gap-3">
                         <button onclick="switchTab('products')" class="bg-white text-brand-600 font-bold px-6 py-3 rounded-2xl shadow-md hover:bg-slate-50 transition-all text-sm flex items-center gap-2">
-                            <span>تصفح كافة المنتجات</span>
-                            <i class="fa-solid fa-arrow-left text-xs"></i>
+                            <span>Utforsk alle produkter</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
                     </div>
                 </div>
                 <!-- Background Graphic Element -->
-                <div class="absolute -left-10 -bottom-10 opacity-20 pointer-events-none">
+                <div class="absolute -right-10 -bottom-10 opacity-20 pointer-events-none">
                     <i class="fa-solid fa-kitchen-set text-[220px]"></i>
                 </div>
             </div>
@@ -126,7 +126,7 @@
             <!-- Appliance Categories Grid -->
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold text-slate-800">الأقسام الرئيسية</h2>
+                    <h2 class="text-xl font-bold text-slate-800">Hovedkategorier</h2>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
@@ -135,8 +135,8 @@
                         <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-500 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-soap"></i>
                         </div>
-                        <h3 class="font-bold text-slate-700 text-base">الغسالات</h3>
-                        <p class="text-xs text-slate-400 mt-1">غسالات ملابس حديثة وموفرة</p>
+                        <h3 class="font-bold text-slate-700 text-base">Vaskemaskiner</h3>
+                        <p class="text-xs text-slate-400 mt-1">Moderne og energieffektive</p>
                     </div>
 
                     <!-- Category 2: Dryers -->
@@ -144,8 +144,8 @@
                         <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-wind"></i>
                         </div>
-                        <h3 class="font-bold text-slate-700 text-base">النشافات</h3>
-                        <p class="text-xs text-slate-400 mt-1">نشافات حرارية ومكثفة</p>
+                        <h3 class="font-bold text-slate-700 text-base">Tørketromler</h3>
+                        <p class="text-xs text-slate-400 mt-1">Kondens og varmepumpe</p>
                     </div>
 
                     <!-- Category 3: Fridges -->
@@ -153,8 +153,8 @@
                         <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-500 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-snowflake"></i>
                         </div>
-                        <h3 class="font-bold text-slate-700 text-base">الثلاجات</h3>
-                        <p class="text-xs text-slate-400 mt-1">ثلاجات وفريزرات متطورة</p>
+                        <h3 class="font-bold text-slate-700 text-base">Kjøleskap</h3>
+                        <p class="text-xs text-slate-400 mt-1">Kjøleskap og frysere</p>
                     </div>
 
                     <!-- Category 4: Stoves / Cookers -->
@@ -162,8 +162,8 @@
                         <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-fire-burner"></i>
                         </div>
-                        <h3 class="font-bold text-slate-700 text-base">الطباخات</h3>
-                        <p class="text-xs text-slate-400 mt-1">طباخات سيراميك وغاز</p>
+                        <h3 class="font-bold text-slate-700 text-base">Komfyrer</h3>
+                        <p class="text-xs text-slate-400 mt-1">Induksjon og keramiske</p>
                     </div>
                 </div>
             </div>
@@ -172,10 +172,10 @@
             <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="w-2.5 h-6 bg-brand-500 rounded-full"></span>
-                    <h2 class="text-xl font-bold text-slate-800">أحدث العروض المختارة</h2>
+                    <h2 class="text-xl font-bold text-slate-800">Utvalgte tilbud</h2>
                 </div>
                 <div id="featured-products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <!-- JavaScript will insert featured items here -->
+                    <!-- JavaScript populates items -->
                 </div>
             </div>
 
@@ -183,18 +183,18 @@
             <div class="grid grid-cols-3 gap-2 text-center bg-brand-50/60 p-4 rounded-2xl border border-brand-100">
                 <div class="p-2">
                     <i class="fa-solid fa-truck-fast text-brand-600 text-xl mb-1"></i>
-                    <h4 class="font-bold text-xs md:text-sm text-slate-700">توصيل سريع</h4>
-                    <p class="text-[10px] text-slate-500">خدمة توصيل موثوقة</p>
+                    <h4 class="font-bold text-xs md:text-sm text-slate-700">Rask levering</h4>
+                    <p class="text-[10px] text-slate-500">Pålitelig leveringstjeneste</p>
                 </div>
                 <div class="p-2 border-r border-l border-brand-200/50">
                     <i class="fa-solid fa-shield-halved text-brand-600 text-xl mb-1"></i>
-                    <h4 class="font-bold text-xs md:text-sm text-slate-700">ضمان الجودة</h4>
-                    <p class="text-[10px] text-slate-500">أجهزة مفحوصة بدقة</p>
+                    <h4 class="font-bold text-xs md:text-sm text-slate-700">Kvalitetsgaranti</h4>
+                    <p class="text-[10px] text-slate-500">Grundig testede produkter</p>
                 </div>
                 <div class="p-2">
                     <i class="fa-solid fa-comments text-brand-600 text-xl mb-1"></i>
-                    <h4 class="font-bold text-xs md:text-sm text-slate-700">طلب عبر SMS</h4>
-                    <p class="text-[10px] text-slate-500">مباشر برقم نرويجي</p>
+                    <h4 class="font-bold text-xs md:text-sm text-slate-700">SMS-bestilling</h4>
+                    <p class="text-[10px] text-slate-500">Direkte til norsk nummer</p>
                 </div>
             </div>
         </section>
@@ -205,27 +205,27 @@
             <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3">
                 <!-- Search Box -->
                 <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3.5 text-slate-400"></i>
-                    <input type="text" id="product-search-input" oninput="applyFilters()" placeholder="ابحث عن موديل غسالة، ثلاجة، طباخ..." 
-                        class="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-400 focus:bg-white transition-all">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400"></i>
+                    <input type="text" id="product-search-input" oninput="applyFilters()" placeholder="Søk etter vaskemaskin, kjøleskap, komfyr..." 
+                        class="w-full pr-4 pl-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-400 focus:bg-white transition-all">
                 </div>
 
                 <!-- Category Filter Pills -->
                 <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-sm">
                     <button onclick="setCategoryFilter('all')" id="filter-btn-all" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-bold bg-brand-500 text-white transition-all">
-                        الكل
+                        Alle
                     </button>
                     <button onclick="setCategoryFilter('washing')" id="filter-btn-washing" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        غسالات
+                        Vaskemaskiner
                     </button>
                     <button onclick="setCategoryFilter('dryer')" id="filter-btn-dryer" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        نشافات
+                        Tørketromler
                     </button>
                     <button onclick="setCategoryFilter('fridge')" id="filter-btn-fridge" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        ثلاجات
+                        Kjøleskap
                     </button>
                     <button onclick="setCategoryFilter('stove')" id="filter-btn-stove" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        طباخات
+                        Komfyrer
                     </button>
                 </div>
             </div>
@@ -238,8 +238,8 @@
             <!-- Empty Search State -->
             <div id="no-products-msg" class="hidden text-center py-12 bg-white rounded-2xl border border-dashed border-slate-200">
                 <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-2"></i>
-                <p class="text-slate-500 font-bold">لا توجد منتجات تطابق بحثك</p>
-                <button onclick="resetFilters()" class="mt-3 text-xs text-brand-600 font-bold underline">إعادة ضبط الفلتر</button>
+                <p class="text-slate-500 font-bold">Ingen produkter samsvarer med søket ditt</p>
+                <button onclick="resetFilters()" class="mt-3 text-xs text-brand-600 font-bold underline">Tilbakestill filter</button>
             </div>
         </section>
 
@@ -250,26 +250,26 @@
                     <img src="999.jpg" alt="LAKSEVÅG HVITEVARER Logo" class="w-20 h-20 object-contain rounded-2xl border border-slate-100 p-1 bg-white shadow-sm">
                     <div>
                         <h2 class="text-2xl font-black text-brand-500 uppercase font-sans">LAKSEVÅG HVITEVARER</h2>
-                        <p class="text-slate-500 text-sm">متجر متخصص في الأجهزة المنزلية الكبيرة في النرويج</p>
+                        <p class="text-slate-500 text-sm">Spesialist på hvitevarer i Norge</p>
                     </div>
                 </div>
 
                 <div class="prose max-w-none text-slate-600 leading-relaxed space-y-4">
                     <p>
-                        مرحباً بكم في متجر <strong>Laksevaag Hvitevarer</strong>. نحن متخصصون في توفير أفضل الأجهزة الكهربائية والمنزلية (غسالات، نشافات، ثلاجات، وطباخات) بأسعار منافسة وجودة عالية.
+                        Velkommen til <strong>Laksevåg Hvitevarer</strong>. Vi spesialiserer oss på å levere de beste hvitevarene (vaskemaskiner, tørketromler, kjøleskap og komfyrer) til konkurransedyktige priser og høy kvalitet.
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <h4 class="font-bold text-slate-800 mb-1 flex items-center gap-2">
-                                <i class="fa-solid fa-location-dot text-brand-500"></i> الموقع
+                                <i class="fa-solid fa-location-dot text-brand-500"></i> Beliggenhet
                             </h4>
-                            <p class="text-xs text-slate-500">Laksevåg, Bergen, Norway</p>
+                            <p class="text-xs text-slate-500">Laksevåg, Bergen, Norge</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <h4 class="font-bold text-slate-800 mb-1 flex items-center gap-2">
-                                <i class="fa-solid fa-phone text-brand-500"></i> التواصل والتكليف
+                                <i class="fa-solid fa-phone text-brand-500"></i> Kontakt og bestilling
                             </h4>
-                            <p class="text-xs text-slate-500">رقم الهاتف النرويجي المخصص للطلبات: +47 45 00 00 00</p>
+                            <p class="text-xs text-slate-500">Norsk telefonnummer for bestillinger: +47 45 00 00 00</p>
                         </div>
                     </div>
                 </div>
@@ -281,13 +281,13 @@
             <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-6 rounded-3xl shadow-lg flex items-center justify-between">
                 <div>
                     <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">
-                        <i class="fa-solid fa-lock text-xs mr-1"></i> وضع المسؤول الخاص (#Hider)
+                        <i class="fa-solid fa-lock text-xs mr-1"></i> Adminmodus (#Hider)
                     </span>
-                    <h2 class="text-xl md:text-2xl font-black">لوحة التحكم وإضافة المنتجات</h2>
-                    <p class="text-slate-300 text-xs mt-1">إضافة أجهزة جديدة وتصغير الصور تلقائياً وإدارتها في الكتالوج</p>
+                    <h2 class="text-xl md:text-2xl font-black">Kontrollpanel og produktbehandling</h2>
+                    <p class="text-slate-300 text-xs mt-1">Legg til nye hvitevarer, komprimer bilder automatisk og administrer katalogen</p>
                 </div>
-                <button onclick="switchTab('home')" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-xs font-bold backdrop-blur-sm transition-all border border-white/20">
-                    <i class="fa-solid fa-arrow-right"></i> العودة للمتجر
+                <button onclick="switchTab('home')" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-xs font-bold backdrop-blur-sm transition-all border border-white/20 flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Tilbake til butikken
                 </button>
             </div>
 
@@ -295,64 +295,64 @@
                 <!-- Add Product Form -->
                 <div class="lg:col-span-2 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4">
                     <h3 class="font-bold text-slate-800 text-lg border-b border-slate-100 pb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-plus text-brand-500"></i> إضافة منتج جديد
+                        <i class="fa-solid fa-circle-plus text-brand-500"></i> Legg til nytt produkt
                     </h3>
 
                     <form id="admin-add-product-form" onsubmit="handleAdminAddProduct(event)" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <!-- Product Title -->
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">اسم المنتج / الموديل *</label>
-                                <input type="text" id="admin-p-title" required placeholder="مثال: غسالة بوش 9 كجم EcoSilence" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Produktnavn / Modell *</label>
+                                <input type="text" id="admin-p-title" required placeholder="f.eks. Bosch 9 kg EcoSilence" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
                             </div>
 
                             <!-- Category Selection -->
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">قسم الجهاز *</label>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
                                 <select id="admin-p-category" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
-                                    <option value="washing">غسالات (Washing Machines)</option>
-                                    <option value="dryer">نشافات (Dryers)</option>
-                                    <option value="fridge">ثلاجات (Fridges)</option>
-                                    <option value="stove">طباخات (Stoves)</option>
+                                    <option value="washing">Vaskemaskiner</option>
+                                    <option value="dryer">Tørketromler</option>
+                                    <option value="fridge">Kjøleskap</option>
+                                    <option value="stove">Komfyrer</option>
                                 </select>
                             </div>
 
                             <!-- Price Input -->
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">السعر (بالكرون النرويجي Kr) *</label>
-                                <input type="text" id="admin-p-price" required placeholder="مثال: 6,490 Kr" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Pris (i NOK / Kr) *</label>
+                                <input type="text" id="admin-p-price" required placeholder="f.eks. 6 490 Kr" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
                             </div>
 
                             <!-- Capacity / Main Spec -->
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">السعة / الحجم الرئيسي</label>
-                                <input type="text" id="admin-p-capacity" placeholder="مثال: 9 كجم أو 366 ليتر" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Kapasitet / Hovedspesifikasjon</label>
+                                <input type="text" id="admin-p-capacity" placeholder="f.eks. 9 kg eller 366 liter" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
                             </div>
                         </div>
 
                         <!-- Image File Upload with Auto-Compress -->
                         <div class="bg-brand-50/50 p-4 rounded-2xl border border-brand-100 space-y-2">
-                            <label class="block text-xs font-bold text-slate-800">صورة المنتج (يتم ضغطها وتجهيزها للويب تلقائياً) *</label>
+                            <label class="block text-xs font-bold text-slate-800">Produktbilde (komprimeres automatisk for rask lasting) *</label>
                             <input type="file" id="admin-p-image-file" accept="image/*" required onchange="previewAndCompressAdminImage(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-500 file:text-white hover:file:bg-brand-600 cursor-pointer">
-                            <p class="text-[10px] text-slate-400">يدعم جميع الصيغ (PNG, JPG, WebP, GIF) ويقوم بالنظام بضغطها بحجم مثالي بسرعة عالية.</p>
+                            <p class="text-[10px] text-slate-400">Støtter alle formater (PNG, JPG, WebP, GIF) og komprimerer bildet automatisk.</p>
 
                             <!-- Image Preview Area -->
                             <div id="admin-image-preview-box" class="hidden mt-3 relative w-full h-40 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center">
-                                <img id="admin-image-preview" src="" alt="معاينة الصورة" class="h-full object-contain p-2">
+                                <img id="admin-image-preview" src="" alt="Forhåndsvisning" class="h-full object-contain p-2">
                                 <span id="admin-image-size-info" class="absolute bottom-2 right-2 bg-slate-900/80 text-white text-[10px] px-2 py-0.5 rounded-md font-mono"></span>
                             </div>
                         </div>
 
                         <!-- Description -->
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">وصف المنتج والمميزات</label>
-                            <textarea id="admin-p-desc" rows="3" placeholder="أدخل شرحاً موجزاً عن مواصفات الجهاز والأمان والتكنولوجيا المستخدمة..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all"></textarea>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Produktbeskrivelse og funksjoner</label>
+                            <textarea id="admin-p-desc" rows="3" placeholder="Skriv en kort beskrivelse av spesifikasjoner, funksjoner og tilstand..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all"></textarea>
                         </div>
 
                         <!-- Action Button -->
                         <button type="submit" id="admin-submit-btn" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-4 rounded-xl shadow-md text-xs flex items-center justify-center gap-2 transition-all">
                             <i class="fa-solid fa-plus-circle text-sm"></i>
-                            <span>إضافة المنتج فوراً للكتالوج</span>
+                            <span>Legg til produkt i katalogen</span>
                         </button>
                     </form>
                 </div>
@@ -361,7 +361,7 @@
                 <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-boxes-stacked text-brand-500"></i> المنتجات في النظام
+                            <i class="fa-solid fa-boxes-stacked text-brand-500"></i> Produkter i systemet
                         </h3>
                         <span id="admin-total-products-badge" class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-0.5 rounded-full">0</span>
                     </div>
@@ -381,9 +381,9 @@
             <div class="flex justify-between items-start border-b border-slate-100 pb-3">
                 <div>
                     <span id="modal-category-badge" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-600 uppercase">
-                        فئة الجهاز
+                        Kategori
                     </span>
-                    <h3 id="modal-title" class="text-xl font-bold text-slate-800 mt-1">اسم الجهاز</h3>
+                    <h3 id="modal-title" class="text-xl font-bold text-slate-800 mt-1">Produktnavn</h3>
                 </div>
                 <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
                     <i class="fa-solid fa-xmark"></i>
@@ -392,26 +392,26 @@
 
             <!-- Image -->
             <div class="w-full h-52 bg-slate-50 rounded-2xl flex items-center justify-center overflow-hidden border border-slate-100">
-                <img id="modal-image" src="" alt="Product Image" class="h-full object-contain p-2">
+                <img id="modal-image" src="" alt="Produktbilde" class="h-full object-contain p-2">
             </div>
 
             <!-- Price & Actions -->
             <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl border border-slate-100">
                 <div>
-                    <span class="text-xs text-slate-400 block">السعر المستحق</span>
+                    <span class="text-xs text-slate-400 block">Pris</span>
                     <span id="modal-price" class="text-lg font-black text-brand-600">0 Kr</span>
                 </div>
                 <button id="modal-add-btn" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-sm text-sm flex items-center gap-2 transition-all">
                     <i class="fa-solid fa-plus"></i>
-                    <span>إضافة للسلة</span>
+                    <span>Legg i handlekurv</span>
                 </button>
             </div>
 
             <!-- Detailed Specifications -->
             <div class="space-y-2">
-                <h4 class="font-bold text-sm text-slate-700">المواصفات الفنية التفصيلية:</h4>
+                <h4 class="font-bold text-sm text-slate-700">Detaljerte tekniske spesifikasjoner:</h4>
                 <div id="modal-specs-list" class="grid grid-cols-2 gap-2 text-xs">
-                    <!-- JavaScript will load specs here -->
+                    <!-- JavaScript populates specs -->
                 </div>
             </div>
             
@@ -423,12 +423,12 @@
 
     <!-- CART & CHECKOUT SLIDE-OVER DRAWER -->
     <div id="cart-drawer" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex justify-end transition-opacity">
-        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl animate-in slide-in-from-left sm:slide-in-from-right duration-200">
+        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200">
             <!-- Header -->
             <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-bag-shopping text-brand-500 text-xl"></i>
-                    <h3 class="font-bold text-slate-800 text-lg">سلة الطلبات</h3>
+                    <h3 class="font-bold text-slate-800 text-lg">Handlekurv</h3>
                 </div>
                 <button onclick="toggleCartModal(false)" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
                     <i class="fa-solid fa-xmark"></i>
@@ -442,27 +442,27 @@
 
             <!-- Customer Details & Order Submit Form -->
             <div class="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
-                <h4 class="font-bold text-slate-700 text-xs uppercase tracking-wider">بيانات مستلم الطلب</h4>
+                <h4 class="font-bold text-slate-700 text-xs uppercase tracking-wider">Leveringsinformasjon</h4>
                 
                 <div class="space-y-2 text-xs">
                     <div>
-                        <label class="block text-slate-600 mb-1 font-semibold">الاسم الكامل *</label>
-                        <input type="text" id="cust-name" placeholder="أدخل اسمك الكريم" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
+                        <label class="block text-slate-600 mb-1 font-semibold">Fullt navn *</label>
+                        <input type="text" id="cust-name" placeholder="Skriv ditt fulle navn" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-slate-600 mb-1 font-semibold">رقم الهاتف للاتصال *</label>
-                        <input type="tel" id="cust-phone" placeholder="مثال: +47 400 00 000" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
+                        <label class="block text-slate-600 mb-1 font-semibold">Telefonnummer *</label>
+                        <input type="tel" id="cust-phone" placeholder="f.eks. +47 400 00 000" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-slate-600 mb-1 font-semibold">عنوان التوصيل في النرويج *</label>
-                        <input type="text" id="cust-address" placeholder="المدينة، الشارع، رقم الشقة" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
+                        <label class="block text-slate-600 mb-1 font-semibold">Leveringsadresse i Norge *</label>
+                        <input type="text" id="cust-address" placeholder="Gateadresse, postnummer, sted" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
                     </div>
                 </div>
 
                 <!-- Norwegian SMS Order Trigger -->
                 <button onclick="submitOrderViaSMS()" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-brand-500/20 text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
                     <i class="fa-solid fa-comment-sms text-lg"></i>
-                    <span>إرسال الطلب عبر SMS (رقم نرويجي)</span>
+                    <span>Send bestilling via SMS (Norsk nummer)</span>
                 </button>
             </div>
         </div>
@@ -475,42 +475,37 @@
                 <i class="fa-solid fa-check"></i>
             </div>
             
-            <h3 class="text-2xl font-extrabold text-slate-800">تم تجهيز طلب الشراء!</h3>
+            <h3 class="text-2xl font-extrabold text-slate-800">Bestillingen er klar!</h3>
             
             <p class="text-sm text-slate-600 leading-relaxed">
-                شكراً لتواصلك مع <strong class="text-brand-600">LAKSEVÅG HVITEVARER</strong>.<br>
-                تم إنشاء نص الرسالة وتجهيزها للإرسال مباشرة إلى الرقم النرويجي المخصص للخدمة:
+                Takk for at du handler hos <strong class="text-brand-600">LAKSEVÅG HVITEVARER</strong>.<br>
+                Meldingen er klargjort for sending direkte til vårt norske servicenummer:
             </p>
 
-            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 text-right text-xs space-y-2">
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 text-left text-xs space-y-2">
                 <div class="flex justify-between items-center text-slate-500 font-bold border-b border-slate-200 pb-1">
-                    <span>الرقم المستهدف:</span>
+                    <span>Mottakernummer:</span>
                     <span class="text-brand-600 font-mono text-sm" dir="ltr">+47 45 00 00 00</span>
                 </div>
                 <div>
-                    <span class="font-bold text-slate-700 block mb-1">المنتجات المطلوبة:</span>
-                    <ul id="confirm-items-list" class="list-disc list-inside text-slate-600 space-y-0.5 pr-2">
+                    <span class="font-bold text-slate-700 block mb-1">Bestilte produkter:</span>
+                    <ul id="confirm-items-list" class="list-disc list-inside text-slate-600 space-y-0.5 pl-2">
                         <!-- JS populated items list WITHOUT PRICES -->
                     </ul>
                 </div>
                 <div class="pt-1 border-t border-slate-100 text-[11px] text-slate-500">
-                    <strong>الاسم:</strong> <span id="confirm-cust-name"></span> | 
-                    <strong>العنوان:</strong> <span id="confirm-cust-address"></span>
+                    <strong>Navn:</strong> <span id="confirm-cust-name"></span> | 
+                    <strong>Adresse:</strong> <span id="confirm-cust-address"></span>
                 </div>
-            </div>
-
-            <div class="bg-amber-50 text-amber-800 border border-amber-200 text-xs p-2.5 rounded-xl text-right flex items-center gap-2">
-                <i class="fa-solid fa-circle-info text-amber-600 text-base flex-shrink-0"></i>
-                <span>ملاحظة: طُبق التوجيه بعدم ذكر المبالغ والأسعار في رسالة التأكيد.</span>
             </div>
 
             <div class="pt-2 flex gap-2">
                 <a id="sms-direct-link" href="#" class="flex-1 bg-brand-500 hover:bg-brand-600 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1 shadow-sm">
                     <i class="fa-solid fa-paper-plane"></i>
-                    <span>فتح تطبيق الرسائل SMS</span>
+                    <span>Åpne SMS-app</span>
                 </a>
                 <button onclick="closeConfirmModal()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm">
-                    إغلاق
+                    Lukk
                 </button>
             </div>
         </div>
@@ -522,14 +517,14 @@
             <div class="w-14 h-14 bg-rose-100 text-rose-500 rounded-full flex items-center justify-center text-2xl mx-auto shadow-inner">
                 <i class="fa-solid fa-triangle-exclamation"></i>
             </div>
-            <h3 class="text-xl font-bold text-slate-800">تأكيد حذف المنتج</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">هل أنت أكتيد من رغبتك في حذف هذا المنتج نهائياً من الكتالوج؟ لا يمكن التراجع عن هذه الخطوة.</p>
+            <h3 class="text-xl font-bold text-slate-800">Bekreft sletting</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Er du sikker på at du vil slette dette produktet permanent fra katalogen? Denne handlingen kan ikke angres.</p>
             <div class="flex gap-2 pt-2">
                 <button onclick="confirmDeleteAdminProduct()" class="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 rounded-xl text-xs shadow-sm transition-all active:scale-95">
-                    حذف نهائي
+                    Slett permanent
                 </button>
                 <button onclick="closeAdminDeleteModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-all">
-                    إلغاء
+                    Avbryt
                 </button>
             </div>
         </div>
@@ -540,7 +535,7 @@
         <div class="bg-white w-full max-w-lg rounded-3xl max-h-[90vh] overflow-y-auto p-6 space-y-4 shadow-2xl border border-slate-100 animate-in slide-in-from-bottom duration-200">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                 <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-pen-to-square text-brand-500"></i> تعديل بيانات المنتج
+                    <i class="fa-solid fa-pen-to-square text-brand-500"></i> Rediger produkt
                 </h3>
                 <button onclick="closeAdminEditModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
                     <i class="fa-solid fa-xmark"></i>
@@ -552,48 +547,48 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">اسم المنتج / الموديل *</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Produktnavn / Modell *</label>
                         <input type="text" id="edit-p-title" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">قسم الجهاز *</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
                         <select id="edit-p-category" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
-                            <option value="washing">غسالات (Washing Machines)</option>
-                            <option value="dryer">نشافات (Dryers)</option>
-                            <option value="fridge">ثلاجات (Fridges)</option>
-                            <option value="stove">طباخات (Stoves)</option>
+                            <option value="washing">Vaskemaskiner</option>
+                            <option value="dryer">Tørketromler</option>
+                            <option value="fridge">Kjøleskap</option>
+                            <option value="stove">Komfyrer</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">السعر (Kr) *</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Pris (Kr) *</label>
                         <input type="text" id="edit-p-price" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">السعة / المواصفة الرئيسية</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Kapasitet / Spesifikasjon</label>
                         <input type="text" id="edit-p-capacity" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
                     </div>
                 </div>
 
                 <!-- Image update -->
                 <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-2">
-                    <label class="block text-xs font-bold text-slate-700">تغيير صورة المنتج (اختياري)</label>
+                    <label class="block text-xs font-bold text-slate-700">Endre produktbilde (valgfritt)</label>
                     <input type="file" id="edit-p-image-file" accept="image/*" onchange="previewAndCompressEditImage(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-500 file:text-white hover:file:bg-brand-600 cursor-pointer">
                     <div id="edit-image-preview-box" class="mt-2 relative w-full h-32 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center">
-                        <img id="edit-image-preview" src="" alt="معاينة الصورة" class="h-full object-contain p-2">
+                        <img id="edit-image-preview" src="" alt="Forhåndsvisning" class="h-full object-contain p-2">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">وصف المنتج والمميزات</label>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Produktbeskrivelse</label>
                     <textarea id="edit-p-desc" rows="3" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all"></textarea>
                 </div>
 
                 <div class="flex gap-2 pt-1">
                     <button type="submit" class="flex-1 bg-brand-500 hover:bg-brand-600 text-white font-bold py-2.5 rounded-xl text-xs shadow-md transition-all active:scale-95">
-                        حفظ التعديلات
+                        Lagre endringer
                     </button>
                     <button type="button" onclick="closeAdminEditModal()" class="px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-all">
-                        إلغاء
+                        Avbryt
                     </button>
                 </div>
             </form>
@@ -603,19 +598,19 @@
     <!-- CUSTOM TOAST NOTIFICATION -->
     <div id="custom-toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-slate-900/90 text-white text-xs px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2 transition-all duration-300 transform -translate-y-12 opacity-0 pointer-events-none">
         <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
-        <span id="toast-message" class="font-bold">تمت العملية بنجاح</span>
+        <span id="toast-message" class="font-bold">Vellykket</span>
     </div>
 
     <!-- MOBILE BOTTOM NAVIGATION BAR -->
     <div class="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-200 md:hidden flex justify-around items-center py-2 px-3 shadow-lg">
         <button onclick="switchTab('home')" id="mob-nav-home" class="flex flex-col items-center gap-0.5 text-brand-500 font-bold">
             <i class="fa-solid fa-house text-lg"></i>
-            <span class="text-[10px]">الرئيسية</span>
+            <span class="text-[10px]">Hjem</span>
         </button>
 
         <button onclick="switchTab('products')" id="mob-nav-products" class="flex flex-col items-center gap-0.5 text-slate-400">
             <i class="fa-solid fa-store text-lg"></i>
-            <span class="text-[10px]">الأجهزة</span>
+            <span class="text-[10px]">Produkter</span>
         </button>
 
         <button onclick="toggleCartModal(true)" class="relative flex flex-col items-center gap-0.5 text-slate-400 p-1">
@@ -627,7 +622,7 @@
 
         <button onclick="switchTab('about')" id="mob-nav-about" class="flex flex-col items-center gap-0.5 text-slate-400">
             <i class="fa-solid fa-circle-info text-lg"></i>
-            <span class="text-[10px]">عن المتجر</span>
+            <span class="text-[10px]">Om oss</span>
         </button>
     </div>
 
@@ -656,143 +651,135 @@
             }, 3000);
         }
 
-        // INITIAL DEFAULT DATASET
+        // INITIAL DEFAULT DATASET IN NORWEGIAN
         const INITIAL_PRODUCTS = [
             {
                 id: 'wm-1',
-                title: 'غسالة بوش سريعة 9 كجم EcoSilence',
+                title: 'Bosch 9 kg EcoSilence Vaskemaskin',
                 category: 'washing',
-                categoryName: 'غسالات',
-                price: '6,490 Kr',
+                categoryName: 'Vaskemaskiner',
+                price: '6 490 Kr',
                 numericPrice: 6490,
-                rating: '4.9',
                 image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'السعة': '9 كجم',
-                    'سرعة الدوران': '1400 دورة/دقيقة',
-                    'تصنيف الطاقة': 'A+++',
-                    'الضمان': '2 سنة'
+                    'Kapasitet': '9 kg',
+                    'Sentrifuge': '1400 o/min',
+                    'Energiklasse': 'A+++',
+                    'Garanti': '2 år'
                 },
-                description: 'غسالة بوش متطورة مع محرك انفرتر هادئ للغايه وبرنامج غسيل سريع خلال 15 دقيقة بكفاءة طاقة عالية.'
+                description: 'Avansert Bosch vaskemaskin med stille invertermotor og 15-minutters hurtigprogram med høy energieffektivitet.'
             },
             {
                 id: 'wm-2',
-                title: 'غسالة سامسونج أوتوماتيك مع بخار 8 كجم',
+                title: 'Samsung 8 kg Dampvaskemaskin',
                 category: 'washing',
-                categoryName: 'غسالات',
-                price: '5,800 Kr',
+                categoryName: 'Vaskemaskiner',
+                price: '5 800 Kr',
                 numericPrice: 5800,
-                rating: '4.8',
                 image: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'السعة': '8 كجم',
-                    'تقنية البخار': 'تعقيم متكامل',
-                    'اللون': 'أبيض ناصع',
-                    'مستوى الضوضاء': '52 dB'
+                    'Kapasitet': '8 kg',
+                    'Dampfunksjon': 'Hygienisk damp',
+                    'Farge': 'Hvit',
+                    'Støynivå': '52 dB'
                 },
-                description: 'تعتمد تقنية التعقيم بالبخار للقضاء على 99.9% من البكتيريا والمسببات للحساسية مع عناية فائقة بالأقمشة.'
+                description: 'Bruker dampteknologi for å fjerne 99,9% av bakterier og allergener med skånsom klespleie.'
             },
             {
                 id: 'dr-1',
-                title: 'نشافة إيلكترولوكس حرارية مع مكثف 8 كجم',
+                title: 'Electrolux 8 kg Varmepumpetørketrommel',
                 category: 'dryer',
-                categoryName: 'نشافات',
-                price: '7,200 Kr',
+                categoryName: 'Tørketromler',
+                price: '7 200 Kr',
                 numericPrice: 7200,
-                rating: '4.9',
                 image: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'السعة': '8 كجم',
-                    'نوع التجفيف': 'مضخة حرارية Heat Pump',
-                    'توفير الطاقة': 'A++',
-                    'مستشعر الرطوبة': 'نعم'
+                    'Kapasitet': '8 kg',
+                    'Tørketype': 'Varmepumpe',
+                    'Energiklasse': 'A++',
+                    'Fuktsensor': 'Ja'
                 },
-                description: 'تجفيف لطيف يحمي الملابس من الانكماش مع استهلاك منخفض جداً للكهرباء ومزودة بحاوية للتكثيف.'
+                description: 'Skånsom tørking som beskytter klærne mot krymping med svært lavt strømforbruk.'
             },
             {
                 id: 'dr-2',
-                title: 'مجفف ملابس بيكو ذكي 7 كجم',
+                title: 'Beko Smart 7 kg Tørketrommel',
                 category: 'dryer',
-                categoryName: 'نشافات',
-                price: '4,950 Kr',
+                categoryName: 'Tørketromler',
+                price: '4 950 Kr',
                 numericPrice: 4950,
-                rating: '4.7',
                 image: 'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'السعة': '7 كجم',
-                    'البرامج': '15 برنامج تجفيف',
-                    'الضمان': 'سنتان',
-                    'إضاءة داخلية': 'نعم'
+                    'Kapasitet': '7 kg',
+                    'Programmer': '15 tørkeprogrammer',
+                    'Garanti': '2 år',
+                    'Innvendig lys': 'Ja'
                 },
-                description: 'مجفف اقتصادي وعالي الكفاءة يمنحك ملابس جافة وجاهزة للارتداء بسرعة وبدون تجاعيد.'
+                description: 'Økonomisk og effektiv tørketrommel som gir deg tørre klær uten skrukker.'
             },
             {
                 id: 'fr-1',
-                title: 'ثلاجة سيمنس دولابي NoFrost مع فريزر',
+                title: 'Siemens Kombiskap NoFrost',
                 category: 'fridge',
-                categoryName: 'ثلاجات',
-                price: '11,500 Kr',
+                categoryName: 'Kjøleskap',
+                price: '11 500 Kr',
                 numericPrice: 11500,
-                rating: '5.0',
                 image: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'السعة الإجمالية': '366 ليتر',
-                    'خاصية منع الثلج': 'NoFrost بالكامل',
-                    'الارتفاع': '203 سم',
-                    'اللون': 'ستيل مقاوم للبصمات'
+                    'Total kapasitet': '366 liter',
+                    'Avising': 'NoFrost',
+                    'Høyde': '203 cm',
+                    'Farge': 'Rustfritt stål'
                 },
-                description: 'ثلاجة سيمنس ذات تصميم فخم وأرفف زجاجية مقواة وحفظ طازج للخضار والفواكه لمدد أطول.'
+                description: 'Elegant Siemens kombiskap med herdede glasshyller og langvarig ferskhet for frukt og grønt.'
             },
             {
                 id: 'fr-2',
-                title: 'ثلاجة ال جي كومبي ذكية Fresh Balancer',
+                title: 'LG Smart Kombiskap Fresh Balancer',
                 category: 'fridge',
-                categoryName: 'ثلاجات',
-                price: '8,900 Kr',
+                categoryName: 'Kjøleskap',
+                price: '8 900 Kr',
                 numericPrice: 8900,
-                rating: '4.8',
                 image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'السعة': '340 ليتر',
-                    'التبريد': 'DoorCooling+',
-                    'شاشة ديجيتال': 'نعم',
-                    'اللون': 'أبيض مدرج'
+                    'Kapasitet': '340 liter',
+                    'Kjøling': 'DoorCooling+',
+                    'Digital skjerm': 'Ja',
+                    'Farge': 'Hvit'
                 },
-                description: 'تدفق هوائي متعدد لتبريد متساوٍ وسريع في كافة أركان الثلاجة للحفاظ على طراوة الأغذية.'
+                description: 'Jevn og rask kjøling i alle hjørner for å bevare matens friskhet.'
             },
             {
                 id: 'st-1',
-                title: 'طباخ سيراميك كهربائي غورينيه مع فرن عريض',
+                title: 'Gorenje Keramisk Komfyr',
                 category: 'stove',
-                categoryName: 'طباخات',
-                price: '6,900 Kr',
+                categoryName: 'Komfyrer',
+                price: '6 900 Kr',
                 numericPrice: 6900,
-                rating: '4.8',
                 image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'عدد الشعلات': '4 مناطق طهي سيراميك',
-                    'سعة الفرن': '71 ليتر',
-                    'ميزة التنظيف': 'AquaClean',
-                    'العرض': '60 سم'
+                    'Kokesoner': '4 keramiske soner',
+                    'Ovnsvolum': '71 liter',
+                    'Rengjøring': 'AquaClean',
+                    'Bredde': '60 cm'
                 },
-                description: 'طباخ سيراميك متكامل ذو تسخين سريع مع فرن بمروحة توزيع الحرارة لتحمير واكتساب طعم رائع.'
+                description: 'Komplett keramisk komfyr med rask oppvarming og varmluftsovn for optimal stekeresultat.'
             },
             {
                 id: 'st-2',
-                title: 'طباخ حثي (Induction) بوش ذكي للمطابخ',
+                title: 'Bosch Induksjonskomfyr',
                 category: 'stove',
-                categoryName: 'طباخات',
-                price: '9,400 Kr',
+                categoryName: 'Komfyrer',
+                price: '9 400 Kr',
                 numericPrice: 9400,
-                rating: '4.9',
                 image: 'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80',
                 specs: {
-                    'تقنية الطهي': 'الحث الكهرومغناطيسي',
-                    'الأمان': 'قفل حماية الأطفال',
-                    'خاصية التعزيز': 'PowerBoost',
-                    'العرض': '60 سم'
+                    'Teknologi': 'Induksjon',
+                    'Sikkerhet': 'Barnesikring',
+                    'Boost': 'PowerBoost',
+                    'Bredde': '60 cm'
                 },
-                description: 'طهي أسرع بمعدل مرتين واستجابة فورية للحرارة مع تنظيف أسهل وأقصى درجات الأمان والسلامة.'
+                description: 'Raskere matlaging og umiddelbar varmerespons med enkel rengjøring og høy sikkerhet.'
             }
         ];
 
@@ -884,7 +871,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // CANVAS IMAGE COMPRESSION FUNCTION (Compresses all image types into web-optimized JPEG Data URL)
+        // CANVAS IMAGE COMPRESSION FUNCTION
         function previewAndCompressAdminImage(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -896,7 +883,6 @@
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
 
-                    // Max dimensions 800x800 for optimal quality and small size
                     const MAX_WIDTH = 800;
                     const MAX_HEIGHT = 800;
                     let width = img.width;
@@ -918,17 +904,15 @@
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    // Compress to JPEG with 0.8 quality
                     compressedAdminImageData = canvas.toDataURL('image/jpeg', 0.8);
 
-                    // Show preview and compressed size
                     const previewBox = document.getElementById('admin-image-preview-box');
                     const previewImg = document.getElementById('admin-image-preview');
                     const sizeInfo = document.getElementById('admin-image-size-info');
 
                     previewImg.src = compressedAdminImageData;
                     const approxSizeKB = Math.round((compressedAdminImageData.length * (3/4)) / 1024);
-                    sizeInfo.innerText = `حجم الصورة بعد الضغط: ~${approxSizeKB} KB`;
+                    sizeInfo.innerText = `Komprimert bildestørrelse: ~${approxSizeKB} KB`;
                     previewBox.classList.remove('hidden');
                 };
                 img.src = e.target.result;
@@ -941,7 +925,7 @@
             e.preventDefault();
 
             if (!compressedAdminImageData) {
-                showToast('يرجى اختيار صورة للمنتج أولاً', 'fa-triangle-exclamation text-amber-400');
+                showToast('Vennligst velg et produktbilde først', 'fa-triangle-exclamation text-amber-400');
                 return;
             }
 
@@ -952,46 +936,42 @@
             const desc = document.getElementById('admin-p-desc').value.trim();
 
             const categoryNames = {
-                'washing': 'غسالات',
-                'dryer': 'نشافات',
-                'fridge': 'ثلاجات',
-                'stove': 'طباخات'
+                'washing': 'Vaskemaskiner',
+                'dryer': 'Tørketromler',
+                'fridge': 'Kjøleskap',
+                'stove': 'Komfyrer'
             };
 
             const newProduct = {
                 id: 'custom-' + Date.now(),
                 title: title,
                 category: category,
-                categoryName: categoryNames[category] || 'أجهزة',
+                categoryName: categoryNames[category] || 'Hvitevarer',
                 price: price.includes('Kr') ? price : `${price} Kr`,
                 numericPrice: parseInt(price.replace(/[^0-9]/g, '')) || 5000,
-                rating: '5.0',
                 image: compressedAdminImageData,
                 specs: {
-                    'المواصفات': capacity || 'ممتازة',
-                    'الحالة': 'جديد / مفحوص',
-                    'الضمان': 'متوفر مع توصيل'
+                    'Spesifikasjon': capacity || 'Utmerket',
+                    'Tilstand': 'Ny / Testet',
+                    'Garanti': 'Inkludert'
                 },
-                description: desc || 'جهاز كهربائي عالي الكفاءة مفحوص ومطابق للمواصفات القياسية.'
+                description: desc || 'Høykvalitets apparat, testet og godkjent i henhold til standarder.'
             };
 
             PRODUCTS_DATA.unshift(newProduct);
             saveProductsToStorage();
 
-            // Refresh UI
             renderFeaturedProducts();
             applyFilters();
             renderAdminProductsList();
 
-            // Reset Form
             document.getElementById('admin-add-product-form').reset();
             document.getElementById('admin-image-preview-box').classList.add('hidden');
             compressedAdminImageData = null;
 
-            showToast('تمت إضافة المنتج بنجاح إلى الكتالوج!', 'fa-circle-check text-emerald-400');
+            showToast('Produktet ble lagt til i katalogen!', 'fa-circle-check text-emerald-400');
         }
 
-        // PROMPT DELETE PRODUCT IN ADMIN PANEL (Shows Modal)
         function promptDeleteAdminProduct(id) {
             targetProductToDeleteId = id;
             document.getElementById('admin-delete-modal').classList.remove('hidden');
@@ -1010,10 +990,9 @@
             applyFilters();
             renderAdminProductsList();
             closeAdminDeleteModal();
-            showToast('تم حذف المنتج بنجاح من الكتالوج', 'fa-trash-can text-rose-400');
+            showToast('Produktet ble slettet fra katalogen', 'fa-trash-can text-rose-400');
         }
 
-        // OPEN ADMIN EDIT MODAL
         function openAdminEditModal(id) {
             const p = PRODUCTS_DATA.find(item => item.id === id);
             if (!p) return;
@@ -1022,7 +1001,7 @@
             document.getElementById('edit-p-title').value = p.title;
             document.getElementById('edit-p-category').value = p.category;
             document.getElementById('edit-p-price').value = p.price;
-            document.getElementById('edit-p-capacity').value = p.specs?.['السعة'] || p.specs?.['المواصفات'] || p.specs?.['السعة الإجمالية'] || '';
+            document.getElementById('edit-p-capacity').value = p.specs?.['Kapasitet'] || p.specs?.['Spesifikasjon'] || p.specs?.['Total kapasitet'] || '';
             document.getElementById('edit-p-desc').value = p.description || '';
             document.getElementById('edit-image-preview').src = p.image;
             compressedEditImageData = p.image;
@@ -1081,23 +1060,23 @@
             const desc = document.getElementById('edit-p-desc').value.trim();
 
             const categoryNames = {
-                'washing': 'غسالات',
-                'dryer': 'نشافات',
-                'fridge': 'ثلاجات',
-                'stove': 'طباخات'
+                'washing': 'Vaskemaskiner',
+                'dryer': 'Tørketromler',
+                'fridge': 'Kjøleskap',
+                'stove': 'Komfyrer'
             };
 
             PRODUCTS_DATA[index] = {
                 ...PRODUCTS_DATA[index],
                 title: title,
                 category: category,
-                categoryName: categoryNames[category] || 'أجهزة',
+                categoryName: categoryNames[category] || 'Hvitevarer',
                 price: price.includes('Kr') ? price : `${price} Kr`,
                 numericPrice: parseInt(price.replace(/[^0-9]/g, '')) || 5000,
                 image: compressedEditImageData || PRODUCTS_DATA[index].image,
                 specs: {
                     ...PRODUCTS_DATA[index].specs,
-                    'السعة': capacity || PRODUCTS_DATA[index].specs?.['السعة'] || 'ممتازة'
+                    'Kapasitet': capacity || PRODUCTS_DATA[index].specs?.['Kapasitet'] || 'Utmerket'
                 },
                 description: desc
             };
@@ -1107,17 +1086,16 @@
             applyFilters();
             renderAdminProductsList();
             closeAdminEditModal();
-            showToast('تم تحديث بيانات المنتج بنجاح', 'fa-pen-to-square text-brand-400');
+            showToast('Produktinformasjonen ble oppdatert', 'fa-pen-to-square text-brand-400');
         }
 
-        // RENDER ADMIN PRODUCTS MANAGEMENT LIST (WITH EDIT & DELETE BUTTONS)
         function renderAdminProductsList() {
             const container = document.getElementById('admin-products-list');
             const badge = document.getElementById('admin-total-products-badge');
             if (badge) badge.innerText = PRODUCTS_DATA.length;
 
             if (PRODUCTS_DATA.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">لا توجد منتجات حتى الآن</p>`;
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Ingen produkter ennå</p>`;
                 return;
             }
 
@@ -1133,10 +1111,10 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-1 flex-shrink-0">
-                        <button onclick="openAdminEditModal('${p.id}')" class="w-7 h-7 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center hover:bg-brand-100 transition-colors" title="تعديل المنتج">
+                        <button onclick="openAdminEditModal('${p.id}')" class="w-7 h-7 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center hover:bg-brand-100 transition-colors" title="Rediger">
                             <i class="fa-solid fa-pen-to-square text-xs"></i>
                         </button>
-                        <button onclick="promptDeleteAdminProduct('${p.id}')" class="w-7 h-7 bg-rose-50 text-rose-500 rounded-lg flex items-center justify-center hover:bg-rose-100 transition-colors" title="حذف المنتج">
+                        <button onclick="promptDeleteAdminProduct('${p.id}')" class="w-7 h-7 bg-rose-50 text-rose-500 rounded-lg flex items-center justify-center hover:bg-rose-100 transition-colors" title="Slett">
                             <i class="fa-solid fa-trash-can text-xs"></i>
                         </button>
                     </div>
@@ -1144,17 +1122,14 @@
             `).join('');
         }
 
-        // FILTER CATEGORY AND SWITCH TO PRODUCTS VIEW
         function filterCategoryAndSwitch(cat) {
             setCategoryFilter(cat);
             switchTab('products');
         }
 
-        // SET CATEGORY FILTER
         function setCategoryFilter(cat) {
             currentFilter = cat;
             
-            // Update filter button styles
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => {
                 btn.classList.remove('bg-brand-500', 'text-white');
@@ -1170,7 +1145,6 @@
             applyFilters();
         }
 
-        // APPLY FILTERS & SEARCH
         function applyFilters() {
             const searchQuery = document.getElementById('product-search-input').value.toLowerCase().trim();
             const container = document.getElementById('products-catalog-grid');
@@ -1196,19 +1170,16 @@
             setCategoryFilter('all');
         }
 
-        // RENDER FEATURED HOME PRODUCTS
         function renderFeaturedProducts() {
             const container = document.getElementById('featured-products-grid');
             const featuredList = PRODUCTS_DATA.slice(0, 3);
             container.innerHTML = featuredList.map(p => createProductCardHTML(p)).join('');
         }
 
-        // RENDER CATALOG PRODUCTS
         function renderCatalogProducts() {
             applyFilters();
         }
 
-        // GENERATE PRODUCT CARD HTML WITH "+" ADD BUTTON & CLICK SPEC MODAL
         function createProductCardHTML(product) {
             return `
                 <div class="bg-white rounded-2xl border border-slate-100 p-3.5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative">
@@ -1219,7 +1190,7 @@
                         </span>
                     </div>
 
-                    <!-- Image (Click opens Spec Modal) -->
+                    <!-- Image -->
                     <div onclick="openProductModal('${product.id}')" class="w-full h-44 bg-slate-50 rounded-xl overflow-hidden mb-3 flex items-center justify-center cursor-pointer relative group-hover:scale-[1.02] transition-transform">
                         <img src="${product.image}" alt="${product.title}" class="h-full object-contain p-2" onerror="this.src='https://placehold.co/400x300/e2e8f0/64748b?text=Appliance'">
                     </div>
@@ -1237,12 +1208,12 @@
                     <!-- Price & Add Button (+) -->
                     <div class="flex items-center justify-between pt-2 border-t border-slate-50 mt-auto">
                         <div>
-                            <span class="text-[10px] text-slate-400 block leading-none">السعر</span>
+                            <span class="text-[10px] text-slate-400 block leading-none">Pris</span>
                             <span class="text-base font-black text-slate-800">${product.price}</span>
                         </div>
 
                         <!-- PLUS (+) BUTTON FOR QUICK ADD TO CART -->
-                        <button onclick="addToCart('${product.id}', event)" class="w-10 h-10 rounded-xl bg-brand-500 hover:bg-brand-600 active:scale-95 text-white flex items-center justify-center shadow-md shadow-brand-500/20 transition-all cursor-pointer" title="إضافة للسلة">
+                        <button onclick="addToCart('${product.id}', event)" class="w-10 h-10 rounded-xl bg-brand-500 hover:bg-brand-600 active:scale-95 text-white flex items-center justify-center shadow-md shadow-brand-500/20 transition-all cursor-pointer" title="Legg i handlekurv">
                             <i class="fa-solid fa-plus text-base font-bold"></i>
                         </button>
                     </div>
@@ -1250,7 +1221,6 @@
             `;
         }
 
-        // OPEN SPECIFICATION MODAL
         function openProductModal(productId) {
             const product = PRODUCTS_DATA.find(p => p.id === productId);
             if (!product) return;
@@ -1261,7 +1231,6 @@
             document.getElementById('modal-price').innerText = product.price;
             document.getElementById('modal-description').innerText = product.description;
 
-            // Render Specs List
             const specsContainer = document.getElementById('modal-specs-list');
             specsContainer.innerHTML = Object.entries(product.specs).map(([key, val]) => `
                 <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 flex flex-col">
@@ -1270,7 +1239,6 @@
                 </div>
             `).join('');
 
-            // Set Modal Add Button
             const addBtn = document.getElementById('modal-add-btn');
             addBtn.onclick = (e) => {
                 addToCart(product.id, e);
@@ -1284,7 +1252,6 @@
             document.getElementById('product-modal').classList.add('hidden');
         }
 
-        // CART LOGIC
         function addToCart(productId, event) {
             if (event) event.stopPropagation();
 
@@ -1300,7 +1267,6 @@
 
             updateCartUI();
             
-            // Trigger visual bounce animation on badge
             const badges = [document.getElementById('cart-count-badge'), document.getElementById('mob-cart-badge')];
             badges.forEach(b => {
                 if (b) {
@@ -1333,8 +1299,8 @@
                 container.innerHTML = `
                     <div class="text-center py-12 text-slate-400 space-y-2">
                         <i class="fa-solid fa-cart-flatbed text-4xl text-slate-300"></i>
-                        <p class="font-bold text-sm">سلة الطلبات فارغة</p>
-                        <p class="text-xs">قم بإضافة غسالات أو نشافات أو ثلاجات وطباخات الآن</p>
+                        <p class="font-bold text-sm">Handlekurven er tom</p>
+                        <p class="text-xs">Legg til vaskemaskiner, tørketromler, kjøleskap eller komfyrer nå.</p>
                     </div>
                 `;
                 return;
@@ -1349,7 +1315,6 @@
                         <span class="text-[10px] text-slate-400">${item.categoryName}</span>
                     </div>
 
-                    <!-- Quantity Adjuster -->
                     <div class="flex items-center border border-slate-200 rounded-lg bg-white overflow-hidden">
                         <button onclick="updateCartQuantity('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold">-</button>
                         <span class="px-2 text-xs font-bold text-slate-800">${item.quantity}</span>
@@ -1371,7 +1336,7 @@
         // SUBMIT ORDER VIA SMS (NORWEGIAN NUMBER) - WITHOUT MENTIONING PRICES
         function submitOrderViaSMS() {
             if (cart.length === 0) {
-                showToast('سلة الطلبات فارغة! يرجى إضافة أجهزة للسلة أولاً.', 'fa-triangle-exclamation text-amber-400');
+                showToast('Handlekurven er tom! Vennligst legg til produkter først.', 'fa-triangle-exclamation text-amber-400');
                 return;
             }
 
@@ -1380,7 +1345,7 @@
             const address = document.getElementById('cust-address').value.trim();
 
             if (!name || !phone || !address) {
-                showToast('يرجى ملء جميع بيانات التوصيل (الاسم، الهاتف، والعنوان).', 'fa-triangle-exclamation text-amber-400');
+                showToast('Vennligst fyll ut all leveringsinformasjon (navn, telefon og adresse).', 'fa-triangle-exclamation text-amber-400');
                 return;
             }
 
@@ -1389,31 +1354,28 @@
             smsMessage += `Jeg ønsker å bestille følgende:\n\n`;
 
             cart.forEach((item, index) => {
-                // STRICTLY NO PRICE INCLUDED HERE
-                smsMessage += `${index + 1}. ${item.title} (العدد: ${item.quantity})\n`;
+                smsMessage += `${index + 1}. ${item.title} (Antall: ${item.quantity})\n`;
             });
 
-            smsMessage += `\nبيانات العميل:\n`;
-            smsMessage += `الاسم: ${name}\n`;
-            smsMessage += `رقم الهاتف: ${phone}\n`;
-            smsMessage += `العنوان: ${address}\n\n`;
-            smsMessage += `يرجى تأكيد واستلام الطلب. Takk!`;
+            smsMessage += `\nKundemottaker:\n`;
+            smsMessage += `Navn: ${name}\n`;
+            smsMessage += `Telefon: ${phone}\n`;
+            smsMessage += `Adresse: ${address}\n\n`;
+            smsMessage += `Vennligst bekreft og motta bestillingen. Takk!`;
 
-            // Prepare SMS URI scheme for Norwegian mobile number
             const encodedBody = encodeURIComponent(smsMessage);
             const smsURI = `sms:${NORWEGIAN_SMS_NUMBER}?body=${encodedBody}`;
 
             // Populate Confirmation Popup WITHOUT ANY PRICES
             const confirmList = document.getElementById('confirm-items-list');
             confirmList.innerHTML = cart.map(item => `
-                <li><strong>${item.title}</strong> - الكمية: ${item.quantity}</li>
+                <li><strong>${item.title}</strong> - Antall: ${item.quantity}</li>
             `).join('');
 
             document.getElementById('confirm-cust-name').innerText = name;
             document.getElementById('confirm-cust-address').innerText = address;
             document.getElementById('sms-direct-link').href = smsURI;
 
-            // Hide Cart Drawer and Show Confirmation Modal
             toggleCartModal(false);
             document.getElementById('confirm-modal').classList.remove('hidden');
         }
