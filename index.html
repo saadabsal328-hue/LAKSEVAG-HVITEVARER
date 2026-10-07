@@ -16,7 +16,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Custom Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -49,7 +48,7 @@
             background-color: #F8FAFC;
             -webkit-tap-highlight-color: transparent;
         }
-        /* Hide scrollbars for mobile design */
+        /* Hide scrollbars for clean mobile UX */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -57,20 +56,10 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Cart badge bounce animation */
-        .cart-badge-bounce {
-            animation: bounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes bounce {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 pb-20 md:pb-0 min-h-screen flex flex-col selection:bg-brand-100 selection:text-brand-700">
 
-    <!-- TOP NAVBAR -->
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <!-- Brand Logo with 999.jpg -->
@@ -79,7 +68,7 @@
             </div>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center gap-6 font-semibold text-slate-600">
+            <nav class="flex items-center gap-4 md:gap-6 font-semibold text-slate-600">
                 <button onclick="switchTab('home')" id="nav-home" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">Hjem</button>
                 <button onclick="switchTab('products')" id="nav-products" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">Produkter</button>
                 <button onclick="switchTab('about')" id="nav-about" class="hover:text-brand-500 transition-colors py-1 border-b-2 border-transparent">Om oss</button>
@@ -87,16 +76,9 @@
                     <i class="fa-solid fa-user-shield"></i> Adminpanel
                 </button>
             </nav>
-
-            <!-- Cart Trigger Button -->
-            <button onclick="toggleCartModal(true)" class="relative bg-brand-50 hover:bg-brand-100 text-brand-600 p-2.5 rounded-2xl transition-all duration-200 flex items-center gap-2 border border-brand-200">
-                <i class="fa-solid fa-cart-shopping text-lg"></i>
-                <span id="cart-count-badge" class="bg-brand-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
-            </button>
         </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-4 md:py-6">
 
         <!-- VIEW 1: HOME PAGE -->
@@ -172,61 +154,20 @@
             <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="w-2.5 h-6 bg-brand-500 rounded-full"></span>
-                    <h2 class="text-xl font-bold text-slate-800">Utvalgte tilbud</h2>
+                    <h2 class="text-xl font-bold text-slate-800">Utvalgte produkter</h2>
                 </div>
                 <div id="featured-products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     <!-- JavaScript populates items -->
-                </div>
-            </div>
-
-            <!-- Trust Badges -->
-            <div class="grid grid-cols-3 gap-2 text-center bg-brand-50/60 p-4 rounded-2xl border border-brand-100">
-                <div class="p-2">
-                    <i class="fa-solid fa-truck-fast text-brand-600 text-xl mb-1"></i>
-                    <h4 class="font-bold text-xs md:text-sm text-slate-700">Rask levering</h4>
-                    <p class="text-[10px] text-slate-500">Pålitelig leveringstjeneste</p>
-                </div>
-                <div class="p-2 border-r border-l border-brand-200/50">
-                    <i class="fa-solid fa-shield-halved text-brand-600 text-xl mb-1"></i>
-                    <h4 class="font-bold text-xs md:text-sm text-slate-700">Kvalitetsgaranti</h4>
-                    <p class="text-[10px] text-slate-500">Grundig testede produkter</p>
-                </div>
-                <div class="p-2">
-                    <i class="fa-solid fa-comments text-brand-600 text-xl mb-1"></i>
-                    <h4 class="font-bold text-xs md:text-sm text-slate-700">SMS-bestilling</h4>
-                    <p class="text-[10px] text-slate-500">Direkte til norsk nummer</p>
                 </div>
             </div>
         </section>
 
         <!-- VIEW 2: PRODUCTS PAGE -->
         <section id="view-products" class="hidden space-y-6">
-            <!-- Search & Filters -->
-            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3">
-                <!-- Search Box -->
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400"></i>
-                    <input type="text" id="product-search-input" oninput="applyFilters()" placeholder="Søk etter vaskemaskin, kjøleskap, komfyr..." 
-                        class="w-full pr-4 pl-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-400 focus:bg-white transition-all">
-                </div>
-
-                <!-- Category Filter Pills -->
-                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-sm">
-                    <button onclick="setCategoryFilter('all')" id="filter-btn-all" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-bold bg-brand-500 text-white transition-all">
-                        Alle
-                    </button>
-                    <button onclick="setCategoryFilter('washing')" id="filter-btn-washing" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        Vaskemaskiner
-                    </button>
-                    <button onclick="setCategoryFilter('dryer')" id="filter-btn-dryer" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        Tørketromler
-                    </button>
-                    <button onclick="setCategoryFilter('fridge')" id="filter-btn-fridge" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        Kjøleskap
-                    </button>
-                    <button onclick="setCategoryFilter('stove')" id="filter-btn-stove" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                        Komfyrer
-                    </button>
+            <!-- Category Filter Pills -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <div id="category-filter-buttons" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-sm">
+                    <!-- Dynamic Category Buttons populated via JS -->
                 </div>
             </div>
 
@@ -238,7 +179,7 @@
             <!-- Empty Search State -->
             <div id="no-products-msg" class="hidden text-center py-12 bg-white rounded-2xl border border-dashed border-slate-200">
                 <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-2"></i>
-                <p class="text-slate-500 font-bold">Ingen produkter samsvarer med søket ditt</p>
+                <p class="text-slate-500 font-bold">Ingen produkter i denne kategorien</p>
                 <button onclick="resetFilters()" class="mt-3 text-xs text-brand-600 font-bold underline">Tilbakestill filter</button>
             </div>
         </section>
@@ -269,7 +210,7 @@
                             <h4 class="font-bold text-slate-800 mb-1 flex items-center gap-2">
                                 <i class="fa-solid fa-phone text-brand-500"></i> Kontakt og bestilling
                             </h4>
-                            <p class="text-xs text-slate-500">Norsk telefonnummer for bestillinger: +47 45 00 00 00</p>
+                            <p class="text-xs text-slate-500">Norsk telefonnummer for bestillinger: +47 93 46 77 11</p>
                         </div>
                     </div>
                 </div>
@@ -284,7 +225,7 @@
                         <i class="fa-solid fa-lock text-xs mr-1"></i> Adminmodus (#Hider)
                     </span>
                     <h2 class="text-xl md:text-2xl font-black">Kontrollpanel og produktbehandling</h2>
-                    <p class="text-slate-300 text-xs mt-1">Legg til nye hvitevarer, komprimer bilder automatisk og administrer katalogen</p>
+                    <p class="text-slate-300 text-xs mt-1">Legg til nye hvitevarer (opptil 4 bilder per produkt), komprimer automatisk og administrer katalogen</p>
                 </div>
                 <button onclick="switchTab('home')" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-xs font-bold backdrop-blur-sm transition-all border border-white/20 flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left"></i> Tilbake til butikken
@@ -303,50 +244,36 @@
                             <!-- Product Title -->
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Produktnavn / Modell *</label>
-                                <input type="text" id="admin-p-title" required placeholder="f.eks. Bosch 9 kg EcoSilence" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                                <input type="text" id="admin-p-title" required placeholder="f.eks. Bosch EcoSilence" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
                             </div>
 
-                            <!-- Category Selection -->
+                            <!-- Category Selection with Delete Button -->
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
-                                <select id="admin-p-category" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
-                                    <option value="washing">Vaskemaskiner</option>
-                                    <option value="dryer">Tørketromler</option>
-                                    <option value="fridge">Kjøleskap</option>
-                                    <option value="stove">Komfyrer</option>
-                                </select>
-                            </div>
-
-                            <!-- Price Input -->
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Pris (i NOK / Kr) *</label>
-                                <input type="text" id="admin-p-price" required placeholder="f.eks. 6 490 Kr" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
-                            </div>
-
-                            <!-- Capacity / Main Spec -->
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Kapasitet / Hovedspesifikasjon</label>
-                                <input type="text" id="admin-p-capacity" placeholder="f.eks. 9 kg eller 366 liter" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                                <div class="flex gap-2 items-center">
+                                    <select id="admin-p-category" required onchange="handleCategorySelectChange(this, 'admin')" class="flex-grow p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                                        <!-- Populated via JS -->
+                                    </select>
+                                    <button type="button" id="admin-delete-cat-btn" onclick="promptDeleteCategory('admin')" title="Slett valgt kategori" class="px-3 py-2.5 bg-rose-50 border border-rose-200 text-rose-600 hover:bg-rose-100 rounded-xl text-xs flex items-center justify-center transition-all active:scale-95 shadow-sm">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Image File Upload with Auto-Compress -->
-                        <div class="bg-brand-50/50 p-4 rounded-2xl border border-brand-100 space-y-2">
-                            <label class="block text-xs font-bold text-slate-800">Produktbilde (komprimeres automatisk for rask lasting) *</label>
-                            <input type="file" id="admin-p-image-file" accept="image/*" required onchange="previewAndCompressAdminImage(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-500 file:text-white hover:file:bg-brand-600 cursor-pointer">
-                            <p class="text-[10px] text-slate-400">Støtter alle formater (PNG, JPG, WebP, GIF) og komprimerer bildet automatisk.</p>
-
-                            <!-- Image Preview Area -->
-                            <div id="admin-image-preview-box" class="hidden mt-3 relative w-full h-40 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center">
-                                <img id="admin-image-preview" src="" alt="Forhåndsvisning" class="h-full object-contain p-2">
-                                <span id="admin-image-size-info" class="absolute bottom-2 right-2 bg-slate-900/80 text-white text-[10px] px-2 py-0.5 rounded-md font-mono"></span>
+                        <!-- Multi-Image File Upload (Max 4 images) -->
+                        <div class="bg-brand-50/50 p-4 rounded-2xl border border-brand-100 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <label class="block text-xs font-bold text-slate-800">Produktbilder (Maks 4 bilder) *</label>
+                                <span id="admin-images-count-badge" class="text-[10px] font-bold text-brand-600 bg-white px-2.5 py-0.5 rounded-full border border-brand-200">0 / 4</span>
                             </div>
-                        </div>
+                            <input type="file" id="admin-p-image-file" accept="image/*" multiple onchange="handleAdminImagesUpload(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-500 file:text-white hover:file:bg-brand-600 cursor-pointer">
+                            <p class="text-[10px] text-slate-400">Du kan velge opptil 4 bilder for samme produkt. Bildene komprimeres automatisk.</p>
 
-                        <!-- Description -->
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Produktbeskrivelse og funksjoner</label>
-                            <textarea id="admin-p-desc" rows="3" placeholder="Skriv en kort beskrivelse av spesifikasjoner, funksjoner og tilstand..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all"></textarea>
+                            <!-- Images Thumbnails Preview Grid -->
+                            <div id="admin-images-preview-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                                <!-- Populated dynamically -->
+                            </div>
                         </div>
 
                         <!-- Action Button -->
@@ -375,138 +302,47 @@
 
     </main>
 
-    <!-- PRODUCT SPECIFICATION MODAL -->
-    <div id="product-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden transition-opacity">
-        <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl max-h-[90vh] overflow-y-auto p-6 space-y-4 shadow-2xl animate-in slide-in-from-bottom duration-200">
-            <div class="flex justify-between items-start border-b border-slate-100 pb-3">
-                <div>
-                    <span id="modal-category-badge" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-600 uppercase">
-                        Kategori
-                    </span>
-                    <h3 id="modal-title" class="text-xl font-bold text-slate-800 mt-1">Produktnavn</h3>
-                </div>
-                <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
+    <!-- PRODUCT SPECIFICATION & IMAGE SLIDER MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity">
+        <div class="bg-white w-full max-w-lg rounded-3xl p-5 space-y-4 shadow-2xl animate-in zoom-in-95 duration-200 relative">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 id="modal-title" class="text-base font-bold text-slate-800 truncate pr-2">Produktbilde</h3>
+                <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200 flex-shrink-0">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Image -->
-            <div class="w-full h-52 bg-slate-50 rounded-2xl flex items-center justify-center overflow-hidden border border-slate-100">
-                <img id="modal-image" src="" alt="Produktbilde" class="h-full object-contain p-2">
-            </div>
+            <!-- Big Interactive Image Slider Container -->
+            <div class="relative w-full h-72 sm:h-80 bg-slate-50 rounded-2xl flex items-center justify-center overflow-hidden border border-slate-100 p-2 group">
+                <img id="modal-image" src="" alt="Produktbilde" class="w-full h-full object-contain rounded-xl transition-all duration-300">
 
-            <!-- Price & Actions -->
-            <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                <div>
-                    <span class="text-xs text-slate-400 block">Pris</span>
-                    <span id="modal-price" class="text-lg font-black text-brand-600">0 Kr</span>
-                </div>
-                <button id="modal-add-btn" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-sm text-sm flex items-center gap-2 transition-all">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>Legg i handlekurv</span>
+                <!-- Left Navigation Arrow -->
+                <button id="modal-prev-btn" onclick="modalPrevImage()" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-slate-800 shadow-md flex items-center justify-center hover:bg-white active:scale-95 transition-all z-10">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
                 </button>
-            </div>
 
-            <!-- Detailed Specifications -->
-            <div class="space-y-2">
-                <h4 class="font-bold text-sm text-slate-700">Detaljerte tekniske spesifikasjoner:</h4>
-                <div id="modal-specs-list" class="grid grid-cols-2 gap-2 text-xs">
-                    <!-- JavaScript populates specs -->
-                </div>
-            </div>
-            
-            <div class="pt-2 border-t border-slate-100">
-                <p id="modal-description" class="text-xs text-slate-500 leading-relaxed"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- CART & CHECKOUT SLIDE-OVER DRAWER -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex justify-end transition-opacity">
-        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200">
-            <!-- Header -->
-            <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-bag-shopping text-brand-500 text-xl"></i>
-                    <h3 class="font-bold text-slate-800 text-lg">Handlekurv</h3>
-                </div>
-                <button onclick="toggleCartModal(false)" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
-                    <i class="fa-solid fa-xmark"></i>
+                <!-- Right Navigation Arrow -->
+                <button id="modal-next-btn" onclick="modalNextImage()" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-slate-800 shadow-md flex items-center justify-center hover:bg-white active:scale-95 transition-all z-10">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
                 </button>
+
+                <!-- Numbering Badge Indicator (e.g. 1 / 3) -->
+                <span id="modal-image-counter" class="absolute top-3 right-3 bg-slate-900/70 text-white text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm shadow-sm font-mono">
+                    1 / 1
+                </span>
             </div>
 
-            <!-- Cart Items List -->
-            <div id="cart-items-container" class="flex-grow overflow-y-auto p-4 space-y-3">
-                <!-- Cart items populated by JavaScript -->
+            <!-- Thumbnails Selector Strip -->
+            <div id="modal-thumbnails-container" class="flex items-center justify-center gap-2 overflow-x-auto py-1">
+                <!-- Thumbnails populated dynamically via JS -->
             </div>
 
-            <!-- Customer Details & Order Submit Form -->
-            <div class="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
-                <h4 class="font-bold text-slate-700 text-xs uppercase tracking-wider">Leveringsinformasjon</h4>
-                
-                <div class="space-y-2 text-xs">
-                    <div>
-                        <label class="block text-slate-600 mb-1 font-semibold">Fullt navn *</label>
-                        <input type="text" id="cust-name" placeholder="Skriv ditt fulle navn" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 mb-1 font-semibold">Telefonnummer *</label>
-                        <input type="tel" id="cust-phone" placeholder="f.eks. +47 400 00 000" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 mb-1 font-semibold">Leveringsadresse i Norge *</label>
-                        <input type="text" id="cust-address" placeholder="Gateadresse, postnummer, sted" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-brand-400 focus:outline-none">
-                    </div>
-                </div>
-
-                <!-- Norwegian SMS Order Trigger -->
-                <button onclick="submitOrderViaSMS()" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-brand-500/20 text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
-                    <i class="fa-solid fa-comment-sms text-lg"></i>
-                    <span>Send bestilling via SMS (Norsk nummer)</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ORDER CONFIRMATION MODAL (NO PRICE DISPLAYED AS REQUESTED) -->
-    <div id="confirm-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-white w-full max-w-md rounded-3xl p-6 text-center space-y-4 shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            
-            <h3 class="text-2xl font-extrabold text-slate-800">Bestillingen er klar!</h3>
-            
-            <p class="text-sm text-slate-600 leading-relaxed">
-                Takk for at du handler hos <strong class="text-brand-600">LAKSEVÅG HVITEVARER</strong>.<br>
-                Meldingen er klargjort for sending direkte til vårt norske servicenummer:
-            </p>
-
-            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 text-left text-xs space-y-2">
-                <div class="flex justify-between items-center text-slate-500 font-bold border-b border-slate-200 pb-1">
-                    <span>Mottakernummer:</span>
-                    <span class="text-brand-600 font-mono text-sm" dir="ltr">+47 45 00 00 00</span>
-                </div>
-                <div>
-                    <span class="font-bold text-slate-700 block mb-1">Bestilte produkter:</span>
-                    <ul id="confirm-items-list" class="list-disc list-inside text-slate-600 space-y-0.5 pl-2">
-                        <!-- JS populated items list WITHOUT PRICES -->
-                    </ul>
-                </div>
-                <div class="pt-1 border-t border-slate-100 text-[11px] text-slate-500">
-                    <strong>Navn:</strong> <span id="confirm-cust-name"></span> | 
-                    <strong>Adresse:</strong> <span id="confirm-cust-address"></span>
-                </div>
-            </div>
-
-            <div class="pt-2 flex gap-2">
-                <a id="sms-direct-link" href="#" class="flex-1 bg-brand-500 hover:bg-brand-600 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1 shadow-sm">
-                    <i class="fa-solid fa-paper-plane"></i>
-                    <span>Åpne SMS-app</span>
+            <!-- Call button for easy inquiry -->
+            <div class="pt-1">
+                <a href="tel:+4793467711" id="modal-call-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-3 rounded-xl shadow-sm text-xs flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Ring for forespørsel (+47 93 46 77 11)</span>
                 </a>
-                <button onclick="closeConfirmModal()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm">
-                    Lukk
-                </button>
             </div>
         </div>
     </div>
@@ -552,46 +388,84 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
-                        <select id="edit-p-category" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
-                            <option value="washing">Vaskemaskiner</option>
-                            <option value="dryer">Tørketromler</option>
-                            <option value="fridge">Kjøleskap</option>
-                            <option value="stove">Komfyrer</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Pris (Kr) *</label>
-                        <input type="text" id="edit-p-price" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Kapasitet / Spesifikasjon</label>
-                        <input type="text" id="edit-p-capacity" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                        <div class="flex gap-2 items-center">
+                            <select id="edit-p-category" required onchange="handleCategorySelectChange(this, 'edit')" class="flex-grow p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all">
+                                <!-- Populated via JS -->
+                            </select>
+                            <button type="button" id="edit-delete-cat-btn" onclick="promptDeleteCategory('edit')" title="Slett valgt kategori" class="px-3 py-2.5 bg-rose-50 border border-rose-200 text-rose-600 hover:bg-rose-100 rounded-xl text-xs flex items-center justify-center transition-all active:scale-95 shadow-sm">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Image update -->
-                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-2">
-                    <label class="block text-xs font-bold text-slate-700">Endre produktbilde (valgfritt)</label>
-                    <input type="file" id="edit-p-image-file" accept="image/*" onchange="previewAndCompressEditImage(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-500 file:text-white hover:file:bg-brand-600 cursor-pointer">
-                    <div id="edit-image-preview-box" class="mt-2 relative w-full h-32 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center">
-                        <img id="edit-image-preview" src="" alt="Forhåndsvisning" class="h-full object-contain p-2">
+                <!-- Multi-Image Edit upload (Max 4 images) -->
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <label class="block text-xs font-bold text-slate-800">Endre produktbilder (Maks 4 bilder)</label>
+                        <span id="edit-images-count-badge" class="text-[10px] font-bold text-brand-600 bg-white px-2.5 py-0.5 rounded-full border border-slate-200">0 / 4</span>
+                    </div>
+                    <input type="file" id="edit-p-image-file" accept="image/*" multiple onchange="handleEditImagesUpload(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-500 file:text-white hover:file:bg-brand-600 cursor-pointer">
+                    
+                    <div id="edit-images-preview-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                        <!-- Populated dynamically via JS -->
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Produktbeskrivelse</label>
-                    <textarea id="edit-p-desc" rows="3" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none transition-all"></textarea>
-                </div>
-
-                <div class="flex gap-2 pt-1">
-                    <button type="submit" class="flex-1 bg-brand-500 hover:bg-brand-600 text-white font-bold py-2.5 rounded-xl text-xs shadow-md transition-all active:scale-95">
+                <div class="flex gap-2 pt-2">
+                    <button type="submit" class="flex-1 bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 rounded-xl text-xs shadow-md transition-all">
                         Lagre endringer
                     </button>
-                    <button type="button" onclick="closeAdminEditModal()" class="px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-all">
+                    <button type="button" onclick="closeAdminEditModal()" class="px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl text-xs transition-all">
                         Avbryt
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- ADD NEW CATEGORY MODAL -->
+    <div id="add-category-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-150">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-folder-plus text-brand-500"></i> Legg til ny kategori
+                </h3>
+                <button onclick="closeAddCategoryModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Kategorinavn *</label>
+                <input type="text" id="new-category-name-input" placeholder="f.eks. Oppvaskmaskiner" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-brand-500 focus:outline-none">
+            </div>
+            <div class="flex gap-2 pt-1">
+                <button onclick="saveNewCategoryFromModal()" class="flex-1 bg-brand-500 hover:bg-brand-600 text-white font-bold py-2.5 rounded-xl text-xs shadow-md transition-all active:scale-95">
+                    Legg til
+                </button>
+                <button onclick="closeAddCategoryModal()" class="px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-all">
+                    Avbryt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE CATEGORY CONFIRMATION MODAL -->
+    <div id="delete-category-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 text-center space-y-4 shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-150">
+            <div class="w-14 h-14 bg-rose-100 text-rose-500 rounded-full flex items-center justify-center text-2xl mx-auto shadow-inner">
+                <i class="fa-solid fa-folder-minus"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">Slett kategori</h3>
+            <p id="delete-category-modal-text" class="text-xs text-slate-500 leading-relaxed">Er du sikker på at du vil slette denne kategorien?</p>
+            <div class="flex gap-2 pt-2">
+                <button onclick="confirmDeleteCategory()" class="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 rounded-xl text-xs shadow-sm transition-all active:scale-95">
+                    Slett permanent
+                </button>
+                <button onclick="closeDeleteCategoryModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-all">
+                    Avbryt
+                </button>
+            </div>
         </div>
     </div>
 
@@ -613,13 +487,6 @@
             <span class="text-[10px]">Produkter</span>
         </button>
 
-        <button onclick="toggleCartModal(true)" class="relative flex flex-col items-center gap-0.5 text-slate-400 p-1">
-            <div class="relative">
-                <i class="fa-solid fa-cart-shopping text-lg"></i>
-                <span id="mob-cart-badge" class="absolute -top-1.5 -right-2 bg-brand-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
-            </div>
-        </button>
-
         <button onclick="switchTab('about')" id="mob-nav-about" class="flex flex-col items-center gap-0.5 text-slate-400">
             <i class="fa-solid fa-circle-info text-lg"></i>
             <span class="text-[10px]">Om oss</span>
@@ -627,353 +494,827 @@
     </div>
 
     <script>
-        // NORWEGIAN PHONE NUMBER FOR SMS
-        const NORWEGIAN_SMS_NUMBER = "+4745000000";
+        const NORWEGIAN_SMS_NUMBER = "+4793467711";
 
         let targetProductToDeleteId = null;
-        let compressedEditImageData = null;
+        let targetCategoryToDeleteId = null;
+        let categoryDeleteContext = null;
+        
+        let adminUploadedImages = [];
+        let editUploadedImages = [];
+        let cardImageIndices = {}; // productId -> currentIndex
+        let currentFilter = 'all';
 
-        function showToast(msg, iconClass = 'fa-circle-check text-emerald-400') {
-            const toast = document.getElementById('custom-toast');
-            const msgEl = document.getElementById('toast-message');
-            const iconEl = document.getElementById('toast-icon');
-            if (!toast || !msgEl || !iconEl) return;
-            
-            msgEl.innerText = msg;
-            iconEl.className = `fa-solid ${iconClass} text-base`;
-            
-            toast.classList.remove('-translate-y-12', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-            
-            setTimeout(() => {
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('-translate-y-12', 'opacity-0', 'pointer-events-none');
-            }, 3000);
-        }
+        let modalCurrentProduct = null;
+        let modalCurrentImageIndex = 0;
+        
+        // Dynamic All Categories List
+        let ALL_CATEGORIES = [
+            { id: 'washing', name: 'Vaskemaskiner' },
+            { id: 'dryer', name: 'Tørketromler' },
+            { id: 'fridge', name: 'Kjøleskap' },
+            { id: 'stove', name: 'Komfyrer' }
+        ];
 
-        // INITIAL DEFAULT DATASET IN NORWEGIAN
-        const INITIAL_PRODUCTS = [
+        let activeCategoryContext = null;
+        let lastSelectedCategory = { admin: 'washing', edit: 'washing' };
+
+        // Default Initial Catalog
+        const DEFAULT_PRODUCTS = [
             {
-                id: 'wm-1',
-                title: 'Bosch 9 kg EcoSilence Vaskemaskin',
+                id: 'prod-1',
+                title: 'Bosch Serie 4 Vaskemaskin 8kg',
                 category: 'washing',
                 categoryName: 'Vaskemaskiner',
-                price: '6 490 Kr',
-                numericPrice: 6490,
-                image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Kapasitet': '9 kg',
-                    'Sentrifuge': '1400 o/min',
-                    'Energiklasse': 'A+++',
-                    'Garanti': '2 år'
-                },
-                description: 'Avansert Bosch vaskemaskin med stille invertermotor og 15-minutters hurtigprogram med høy energieffektivitet.'
+                image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80',
+                images: ['https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80']
             },
             {
-                id: 'wm-2',
-                title: 'Samsung 8 kg Dampvaskemaskin',
-                category: 'washing',
-                categoryName: 'Vaskemaskiner',
-                price: '5 800 Kr',
-                numericPrice: 5800,
-                image: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Kapasitet': '8 kg',
-                    'Dampfunksjon': 'Hygienisk damp',
-                    'Farge': 'Hvit',
-                    'Støynivå': '52 dB'
-                },
-                description: 'Bruker dampteknologi for å fjerne 99,9% av bakterier og allergener med skånsom klespleie.'
-            },
-            {
-                id: 'dr-1',
-                title: 'Electrolux 8 kg Varmepumpetørketrommel',
+                id: 'prod-2',
+                title: 'Miele T1 Varmepumpetørketrommel 8kg',
                 category: 'dryer',
                 categoryName: 'Tørketromler',
-                price: '7 200 Kr',
-                numericPrice: 7200,
-                image: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Kapasitet': '8 kg',
-                    'Tørketype': 'Varmepumpe',
-                    'Energiklasse': 'A++',
-                    'Fuktsensor': 'Ja'
-                },
-                description: 'Skånsom tørking som beskytter klærne mot krymping med svært lavt strømforbruk.'
+                image: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=500&q=80',
+                images: ['https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=500&q=80']
             },
             {
-                id: 'dr-2',
-                title: 'Beko Smart 7 kg Tørketrommel',
-                category: 'dryer',
-                categoryName: 'Tørketromler',
-                price: '4 950 Kr',
-                numericPrice: 4950,
-                image: 'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Kapasitet': '7 kg',
-                    'Programmer': '15 tørkeprogrammer',
-                    'Garanti': '2 år',
-                    'Innvendig lys': 'Ja'
-                },
-                description: 'Økonomisk og effektiv tørketrommel som gir deg tørre klær uten skrukker.'
-            },
-            {
-                id: 'fr-1',
-                title: 'Siemens Kombiskap NoFrost',
+                id: 'prod-3',
+                title: 'Samsung NoFrost Kombiskap 340L',
                 category: 'fridge',
                 categoryName: 'Kjøleskap',
-                price: '11 500 Kr',
-                numericPrice: 11500,
-                image: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Total kapasitet': '366 liter',
-                    'Avising': 'NoFrost',
-                    'Høyde': '203 cm',
-                    'Farge': 'Rustfritt stål'
-                },
-                description: 'Elegant Siemens kombiskap med herdede glasshyller og langvarig ferskhet for frukt og grønt.'
+                image: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=500&q=80',
+                images: ['https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=500&q=80']
             },
             {
-                id: 'fr-2',
-                title: 'LG Smart Kombiskap Fresh Balancer',
-                category: 'fridge',
-                categoryName: 'Kjøleskap',
-                price: '8 900 Kr',
-                numericPrice: 8900,
-                image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Kapasitet': '340 liter',
-                    'Kjøling': 'DoorCooling+',
-                    'Digital skjerm': 'Ja',
-                    'Farge': 'Hvit'
-                },
-                description: 'Jevn og rask kjøling i alle hjørner for å bevare matens friskhet.'
-            },
-            {
-                id: 'st-1',
-                title: 'Gorenje Keramisk Komfyr',
+                id: 'prod-4',
+                title: 'Electrolux Induksjonskomfyr 60cm',
                 category: 'stove',
                 categoryName: 'Komfyrer',
-                price: '6 900 Kr',
-                numericPrice: 6900,
-                image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Kokesoner': '4 keramiske soner',
-                    'Ovnsvolum': '71 liter',
-                    'Rengjøring': 'AquaClean',
-                    'Bredde': '60 cm'
-                },
-                description: 'Komplett keramisk komfyr med rask oppvarming og varmluftsovn for optimal stekeresultat.'
-            },
-            {
-                id: 'st-2',
-                title: 'Bosch Induksjonskomfyr',
-                category: 'stove',
-                categoryName: 'Komfyrer',
-                price: '9 400 Kr',
-                numericPrice: 9400,
-                image: 'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80',
-                specs: {
-                    'Teknologi': 'Induksjon',
-                    'Sikkerhet': 'Barnesikring',
-                    'Boost': 'PowerBoost',
-                    'Bredde': '60 cm'
-                },
-                description: 'Raskere matlaging og umiddelbar varmerespons med enkel rengjøring og høy sikkerhet.'
+                image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500&q=80',
+                images: ['https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500&q=80']
             }
         ];
 
-        // DYNAMIC PRODUCTS ARRAY LOADED FROM LOCALSTORAGE
         let PRODUCTS_DATA = [];
-        let compressedAdminImageData = null;
 
-        // CART STATE
-        let cart = [];
-        let currentFilter = 'all';
-
-        // INITIALIZATION
-        window.addEventListener('DOMContentLoaded', () => {
-            loadProductsFromStorage();
-            checkHashRoute();
-            renderFeaturedProducts();
-            renderCatalogProducts();
-            renderAdminProductsList();
-            updateCartUI();
-            switchTab('admin');
-        });
-
-        // LISTEN TO HASH CHANGE FOR #Hider
-        window.addEventListener('hashchange', checkHashRoute);
-
-        function checkHashRoute() {
-            const hash = window.location.hash;
-            if (hash === '#Hider' || hash === '#/Hider') {
-                const adminNav = document.getElementById('nav-admin');
-                if (adminNav) adminNav.classList.remove('hidden');
-                switchTab('admin');
+        function getProductImages(product) {
+            if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+                return product.images;
             }
-        }
-
-        // STORAGE MANAGEMENT
-        function loadProductsFromStorage() {
-            const stored = localStorage.getItem('laksevaag_custom_products');
-            if (stored) {
-                try {
-                    PRODUCTS_DATA = JSON.parse(stored);
-                } catch (e) {
-                    PRODUCTS_DATA = [...INITIAL_PRODUCTS];
-                }
-            } else {
-                PRODUCTS_DATA = [...INITIAL_PRODUCTS];
+            if (product.image) {
+                return [product.image];
             }
+            return ['https://placehold.co/400x300/e2e8f0/64748b?text=Appliance'];
         }
 
-        function saveProductsToStorage() {
-            localStorage.setItem('laksevaag_custom_products', JSON.stringify(PRODUCTS_DATA));
-        }
-
-        // TAB SWITCHER
         function switchTab(tabName) {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-products').classList.add('hidden');
-            document.getElementById('view-about').classList.add('hidden');
-            document.getElementById('view-admin').classList.add('hidden');
+            const tabs = ['home', 'products', 'about', 'admin'];
+            
+            tabs.forEach(t => {
+                const view = document.getElementById(`view-${t}`);
+                if (view) view.classList.add('hidden');
+
+                const navBtn = document.getElementById(`nav-${t}`);
+                if (navBtn && t !== 'admin') {
+                    navBtn.classList.remove('text-brand-500', 'border-brand-500');
+                    navBtn.classList.add('text-slate-600', 'border-transparent');
+                }
+
+                const mobBtn = document.getElementById(`mob-nav-${t}`);
+                if (mobBtn) {
+                    mobBtn.classList.remove('text-brand-500');
+                    mobBtn.classList.add('text-slate-400');
+                }
+            });
 
             const targetView = document.getElementById(`view-${tabName}`);
             if (targetView) targetView.classList.remove('hidden');
 
-            // Desktop Nav highlight
-            ['home', 'products', 'about', 'admin'].forEach(t => {
-                const navBtn = document.getElementById(`nav-${t}`);
-                const mobNavBtn = document.getElementById(`mob-nav-${t}`);
-                
-                if (navBtn) {
-                    if (t === tabName) {
-                        navBtn.classList.add('border-brand-500', 'text-brand-500');
-                        navBtn.classList.remove('border-transparent');
-                    } else {
-                        navBtn.classList.remove('border-brand-500', 'text-brand-500');
-                        navBtn.classList.add('border-transparent');
-                    }
-                }
+            const activeNav = document.getElementById(`nav-${tabName}`);
+            if (activeNav && tabName !== 'admin') {
+                activeNav.classList.add('text-brand-500', 'border-brand-500');
+                activeNav.classList.remove('text-slate-600', 'border-transparent');
+            }
 
-                if (mobNavBtn) {
-                    if (t === tabName) {
-                        mobNavBtn.classList.add('text-brand-500', 'font-bold');
-                        mobNavBtn.classList.remove('text-slate-400');
-                    } else {
-                        mobNavBtn.classList.remove('text-brand-500', 'font-bold');
-                        mobNavBtn.classList.add('text-slate-400');
-                    }
-                }
-            });
+            const activeMob = document.getElementById(`mob-nav-${tabName}`);
+            if (activeMob) {
+                activeMob.classList.add('text-brand-500');
+                activeMob.classList.remove('text-slate-400');
+            }
+
+            if (tabName === 'admin') {
+                renderAdminProductsList();
+            } else if (tabName === 'products') {
+                renderCatalogProducts();
+            } else if (tabName === 'home') {
+                renderFeaturedProducts();
+            }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // CANVAS IMAGE COMPRESSION FUNCTION
-        function previewAndCompressAdminImage(event) {
-            const file = event.target.files[0];
-            if (!file) return;
+        function loadProductsFromStorage() {
+            const stored = localStorage.getItem('laksevaag_products_data');
+            if (stored) {
+                try {
+                    PRODUCTS_DATA = JSON.parse(stored);
+                } catch(e) {
+                    PRODUCTS_DATA = [...DEFAULT_PRODUCTS];
+                }
+            } else {
+                PRODUCTS_DATA = [...DEFAULT_PRODUCTS];
+                saveProductsToStorage();
+            }
+        }
 
+        function saveProductsToStorage() {
+            localStorage.setItem('laksevaag_products_data', JSON.stringify(PRODUCTS_DATA));
+        }
+
+        function loadCustomCategories() {
+            const stored = localStorage.getItem('laksevaag_all_categories');
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        ALL_CATEGORIES = parsed;
+                    }
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+        }
+
+        function saveCustomCategories() {
+            localStorage.setItem('laksevaag_all_categories', JSON.stringify(ALL_CATEGORIES));
+        }
+
+        function getCategoryName(catId) {
+            const found = ALL_CATEGORIES.find(c => c.id === catId);
+            if (found) return found.name;
+            return catId;
+        }
+
+        function populateCategoryDropdowns() {
+            const adminSelect = document.getElementById('admin-p-category');
+            const editSelect = document.getElementById('edit-p-category');
+
+            let optionsHtml = ALL_CATEGORIES.map(opt => `<option value="${opt.id}">${opt.name}</option>`).join('');
+            optionsHtml += `<option value="__add_new__" class="font-bold text-brand-600 bg-brand-50">+ Legg til ny kategori...</option>`;
+
+            if (adminSelect) {
+                const curVal = adminSelect.value;
+                adminSelect.innerHTML = optionsHtml;
+                if (curVal && curVal !== '__add_new__' && ALL_CATEGORIES.some(c => c.id === curVal)) {
+                    adminSelect.value = curVal;
+                } else if (ALL_CATEGORIES.length > 0) {
+                    adminSelect.value = ALL_CATEGORIES[0].id;
+                }
+                updateDeleteCatBtnVisibility('admin');
+            }
+            if (editSelect) {
+                const curVal = editSelect.value;
+                editSelect.innerHTML = optionsHtml;
+                if (curVal && curVal !== '__add_new__' && ALL_CATEGORIES.some(c => c.id === curVal)) {
+                    editSelect.value = curVal;
+                } else if (ALL_CATEGORIES.length > 0) {
+                    editSelect.value = ALL_CATEGORIES[0].id;
+                }
+                updateDeleteCatBtnVisibility('edit');
+            }
+        }
+
+        function updateDeleteCatBtnVisibility(context) {
+            const selectElem = document.getElementById(context === 'admin' ? 'admin-p-category' : 'edit-p-category');
+            const deleteBtn = document.getElementById(context === 'admin' ? 'admin-delete-cat-btn' : 'edit-delete-cat-btn');
+            if (!selectElem || !deleteBtn) return;
+
+            if (selectElem.value !== '__add_new__' && ALL_CATEGORIES.length > 1) {
+                deleteBtn.classList.remove('hidden');
+            } else {
+                deleteBtn.classList.add('hidden');
+            }
+        }
+
+        function handleCategorySelectChange(selectElem, context) {
+            if (selectElem.value === '__add_new__') {
+                activeCategoryContext = context;
+                document.getElementById('new-category-name-input').value = '';
+                document.getElementById('add-category-modal').classList.remove('hidden');
+                selectElem.value = lastSelectedCategory[context] || (ALL_CATEGORIES[0] ? ALL_CATEGORIES[0].id : 'washing');
+            } else {
+                lastSelectedCategory[context] = selectElem.value;
+            }
+            updateDeleteCatBtnVisibility(context);
+        }
+
+        function promptDeleteCategory(context) {
+            const selectElem = document.getElementById(context === 'admin' ? 'admin-p-category' : 'edit-p-category');
+            if (!selectElem) return;
+
+            const catId = selectElem.value;
+            const targetCat = ALL_CATEGORIES.find(c => c.id === catId);
+            if (!targetCat) return;
+
+            targetCategoryToDeleteId = catId;
+            categoryDeleteContext = context;
+
+            const modalText = document.getElementById('delete-category-modal-text');
+            if (modalText) {
+                modalText.innerText = `Er du sikker på at du vil slette kategorien "${targetCat.name}"? Produkter i denne kategorien vil flyttes til den første tilgjengelige kategorien.`;
+            }
+
+            document.getElementById('delete-category-modal').classList.remove('hidden');
+        }
+
+        function closeDeleteCategoryModal() {
+            targetCategoryToDeleteId = null;
+            categoryDeleteContext = null;
+            document.getElementById('delete-category-modal').classList.add('hidden');
+        }
+
+        function confirmDeleteCategory() {
+            if (!targetCategoryToDeleteId) return;
+
+            const catName = getCategoryName(targetCategoryToDeleteId);
+
+            ALL_CATEGORIES = ALL_CATEGORIES.filter(c => c.id !== targetCategoryToDeleteId);
+            saveCustomCategories();
+
+            const fallbackCatId = ALL_CATEGORIES.length > 0 ? ALL_CATEGORIES[0].id : 'washing';
+            const fallbackCatName = ALL_CATEGORIES.length > 0 ? ALL_CATEGORIES[0].name : 'Vaskemaskiner';
+
+            let updatedProducts = false;
+            PRODUCTS_DATA.forEach(p => {
+                if (p.category === targetCategoryToDeleteId) {
+                    p.category = fallbackCatId;
+                    p.categoryName = fallbackCatName;
+                    updatedProducts = true;
+                }
+            });
+            if (updatedProducts) {
+                saveProductsToStorage();
+            }
+
+            if (currentFilter === targetCategoryToDeleteId) {
+                currentFilter = 'all';
+            }
+
+            populateCategoryDropdowns();
+            renderCategoryFilterButtons();
+            renderFeaturedProducts();
+            applyFilters();
+            renderAdminProductsList();
+
+            closeDeleteCategoryModal();
+            showToast(`Kategorien "${catName}" ble slettet`, 'fa-trash-can text-rose-400');
+        }
+
+        function closeAddCategoryModal() {
+            document.getElementById('add-category-modal').classList.add('hidden');
+            activeCategoryContext = null;
+        }
+
+        function saveNewCategoryFromModal() {
+            const input = document.getElementById('new-category-name-input');
+            const catName = input ? input.value.trim() : '';
+
+            if (!catName) {
+                showToast('Vennligst skriv inn et kategorinavn', 'fa-triangle-exclamation text-amber-400');
+                return;
+            }
+
+            const catId = 'cat-' + Date.now();
+            const newCat = { id: catId, name: catName };
+
+            ALL_CATEGORIES.push(newCat);
+            saveCustomCategories();
+
+            populateCategoryDropdowns();
+            renderCategoryFilterButtons();
+
+            if (activeCategoryContext === 'admin') {
+                const adminSelect = document.getElementById('admin-p-category');
+                if (adminSelect) {
+                    adminSelect.value = catId;
+                    lastSelectedCategory['admin'] = catId;
+                    updateDeleteCatBtnVisibility('admin');
+                }
+            } else if (activeCategoryContext === 'edit') {
+                const editSelect = document.getElementById('edit-p-category');
+                if (editSelect) {
+                    editSelect.value = catId;
+                    lastSelectedCategory['edit'] = catId;
+                    updateDeleteCatBtnVisibility('edit');
+                }
+            }
+
+            closeAddCategoryModal();
+            showToast(`Kategorien "${catName}" ble lagt til!`, 'fa-circle-check text-emerald-400');
+        }
+
+        function renderCategoryFilterButtons() {
+            const container = document.getElementById('category-filter-buttons');
+            if (!container) return;
+
+            let html = `
+                <button onclick="setCategoryFilter('all')" id="filter-btn-all" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap ${currentFilter === 'all' ? 'bg-brand-500 text-white font-bold' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 font-semibold'} transition-all">
+                    Alle
+                </button>
+            `;
+
+            ALL_CATEGORIES.forEach(cat => {
+                const isActive = currentFilter === cat.id;
+                const btnClass = isActive 
+                    ? 'bg-brand-500 text-white font-bold' 
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 font-semibold';
+                
+                html += `
+                    <button onclick="setCategoryFilter('${cat.id}')" id="filter-btn-${cat.id}" class="filter-btn px-4 py-1.5 rounded-xl whitespace-nowrap ${btnClass} transition-all">
+                        ${cat.name}
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function setCategoryFilter(cat) {
+            currentFilter = cat;
+            renderCategoryFilterButtons();
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const container = document.getElementById('products-catalog-grid');
+            const noMsg = document.getElementById('no-products-msg');
+            if (!container) return;
+
+            const filtered = PRODUCTS_DATA.filter(p => {
+                return (currentFilter === 'all') || (p.category === currentFilter);
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                if (noMsg) noMsg.classList.remove('hidden');
+            } else {
+                if (noMsg) noMsg.classList.add('hidden');
+                container.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+            }
+        }
+
+        function resetFilters() {
+            setCategoryFilter('all');
+        }
+
+        function renderFeaturedProducts() {
+            const container = document.getElementById('featured-products-grid');
+            if (!container) return;
+            const featuredList = PRODUCTS_DATA.slice(0, 3);
+            container.innerHTML = featuredList.map(p => createProductCardHTML(p)).join('');
+        }
+
+        function renderCatalogProducts() {
+            applyFilters();
+        }
+
+        function filterCategoryAndSwitch(cat) {
+            setCategoryFilter(cat);
+            switchTab('products');
+        }
+
+        function compressImageFile(file, callback) {
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 const img = new Image();
-                img.onload = function () {
+                img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-
-                    const MAX_WIDTH = 800;
-                    const MAX_HEIGHT = 800;
                     let width = img.width;
                     let height = img.height;
+                    const maxDim = 800;
 
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
+                    if (width > height && width > maxDim) {
+                        height = Math.round((height * maxDim) / width);
+                        width = maxDim;
+                    } else if (height > maxDim) {
+                        width = Math.round((width * maxDim) / height);
+                        height = maxDim;
                     }
 
                     canvas.width = width;
                     canvas.height = height;
+                    const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    compressedAdminImageData = canvas.toDataURL('image/jpeg', 0.8);
-
-                    const previewBox = document.getElementById('admin-image-preview-box');
-                    const previewImg = document.getElementById('admin-image-preview');
-                    const sizeInfo = document.getElementById('admin-image-size-info');
-
-                    previewImg.src = compressedAdminImageData;
-                    const approxSizeKB = Math.round((compressedAdminImageData.length * (3/4)) / 1024);
-                    sizeInfo.innerText = `Komprimert bildestørrelse: ~${approxSizeKB} KB`;
-                    previewBox.classList.remove('hidden');
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+                    const sizeKB = Math.round((dataUrl.length * 3 / 4) / 1024);
+                    callback(dataUrl, sizeKB);
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
 
-        // HANDLE ADMIN PRODUCT SUBMISSION
-        function handleAdminAddProduct(e) {
-            e.preventDefault();
+        /* --- ADMIN MULTI-IMAGE UPLOADER (MAX 4 IMAGES) --- */
+        function handleAdminImagesUpload(event) {
+            const files = Array.from(event.target.files);
+            if (!files || files.length === 0) return;
 
-            if (!compressedAdminImageData) {
-                showToast('Vennligst velg et produktbilde først', 'fa-triangle-exclamation text-amber-400');
+            const remainingSlots = 4 - adminUploadedImages.length;
+            if (remainingSlots <= 0) {
+                showToast('Maksimalt 4 bilder er tillatt per produkt', 'fa-triangle-exclamation text-amber-400');
+                event.target.value = '';
                 return;
             }
 
-            const title = document.getElementById('admin-p-title').value.trim();
-            const category = document.getElementById('admin-p-category').value;
-            const price = document.getElementById('admin-p-price').value.trim();
-            const capacity = document.getElementById('admin-p-capacity').value.trim();
-            const desc = document.getElementById('admin-p-desc').value.trim();
+            const filesToProcess = files.slice(0, remainingSlots);
+            if (files.length > remainingSlots) {
+                showToast(`Maks 4 bilder tillatt. Lagt til de første ${remainingSlots} bildene.`, 'fa-circle-info text-sky-400');
+            }
 
-            const categoryNames = {
-                'washing': 'Vaskemaskiner',
-                'dryer': 'Tørketromler',
-                'fridge': 'Kjøleskap',
-                'stove': 'Komfyrer'
-            };
+            let processed = 0;
+            filesToProcess.forEach(file => {
+                compressImageFile(file, (dataUrl) => {
+                    adminUploadedImages.push(dataUrl);
+                    processed++;
+                    if (processed === filesToProcess.length) {
+                        renderAdminImagePreviews();
+                    }
+                });
+            });
+
+            event.target.value = '';
+        }
+
+        function renderAdminImagePreviews() {
+            const grid = document.getElementById('admin-images-preview-grid');
+            const badge = document.getElementById('admin-images-count-badge');
+            if (!grid) return;
+
+            if (badge) badge.innerText = `${adminUploadedImages.length} / 4`;
+
+            if (adminUploadedImages.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-[11px] text-slate-400 text-center py-4 bg-white rounded-xl border border-dashed border-slate-200">Ingen bilder valgt ennå.</div>`;
+                return;
+            }
+
+            grid.innerHTML = adminUploadedImages.map((dataUrl, idx) => `
+                <div class="relative w-full h-24 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center group p-1 shadow-sm">
+                    <img src="${dataUrl}" class="h-full object-contain">
+                    <button type="button" onclick="removeAdminImage(${idx})" title="Slett bilde" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-500 text-white text-[10px] flex items-center justify-center shadow-md hover:bg-rose-600 transition-all active:scale-95">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <span class="absolute bottom-1 left-1 bg-slate-900/80 text-white text-[9px] font-bold px-1.5 py-0.2 rounded font-mono">#${idx + 1}</span>
+                </div>
+            `).join('');
+        }
+
+        function removeAdminImage(index) {
+            adminUploadedImages.splice(index, 1);
+            renderAdminImagePreviews();
+        }
+
+        /* --- EDIT MULTI-IMAGE UPLOADER (MAX 4 IMAGES) --- */
+        function handleEditImagesUpload(event) {
+            const files = Array.from(event.target.files);
+            if (!files || files.length === 0) return;
+
+            const remainingSlots = 4 - editUploadedImages.length;
+            if (remainingSlots <= 0) {
+                showToast('Maksimalt 4 bilder er tillatt per produkt', 'fa-triangle-exclamation text-amber-400');
+                event.target.value = '';
+                return;
+            }
+
+            const filesToProcess = files.slice(0, remainingSlots);
+            let processed = 0;
+            filesToProcess.forEach(file => {
+                compressImageFile(file, (dataUrl) => {
+                    editUploadedImages.push(dataUrl);
+                    processed++;
+                    if (processed === filesToProcess.length) {
+                        renderEditImagePreviews();
+                    }
+                });
+            });
+
+            event.target.value = '';
+        }
+
+        function renderEditImagePreviews() {
+            const grid = document.getElementById('edit-images-preview-grid');
+            const badge = document.getElementById('edit-images-count-badge');
+            if (!grid) return;
+
+            if (badge) badge.innerText = `${editUploadedImages.length} / 4`;
+
+            if (editUploadedImages.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-[11px] text-slate-400 text-center py-4 bg-white rounded-xl border border-dashed border-slate-200">Ingen bilder valgt.</div>`;
+                return;
+            }
+
+            grid.innerHTML = editUploadedImages.map((dataUrl, idx) => `
+                <div class="relative w-full h-24 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center group p-1 shadow-sm">
+                    <img src="${dataUrl}" class="h-full object-contain">
+                    <button type="button" onclick="removeEditImage(${idx})" title="Slett bilde" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-500 text-white text-[10px] flex items-center justify-center shadow-md hover:bg-rose-600 transition-all active:scale-95">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <span class="absolute bottom-1 left-1 bg-slate-900/80 text-white text-[9px] font-bold px-1.5 py-0.2 rounded font-mono">#${idx + 1}</span>
+                </div>
+            `).join('');
+        }
+
+        function removeEditImage(index) {
+            editUploadedImages.splice(index, 1);
+            renderEditImagePreviews();
+        }
+
+        function handleAdminAddProduct(event) {
+            event.preventDefault();
+            const title = document.getElementById('admin-p-title').value.trim();
+            const catSelect = document.getElementById('admin-p-category');
+            const category = catSelect.value;
+            const categoryName = getCategoryName(category);
+
+            if (adminUploadedImages.length === 0) {
+                showToast('Vennligst velg minst ett produktbilde', 'fa-triangle-exclamation text-amber-400');
+                return;
+            }
 
             const newProduct = {
-                id: 'custom-' + Date.now(),
+                id: 'prod-' + Date.now(),
                 title: title,
                 category: category,
-                categoryName: categoryNames[category] || 'Hvitevarer',
-                price: price.includes('Kr') ? price : `${price} Kr`,
-                numericPrice: parseInt(price.replace(/[^0-9]/g, '')) || 5000,
-                image: compressedAdminImageData,
-                specs: {
-                    'Spesifikasjon': capacity || 'Utmerket',
-                    'Tilstand': 'Ny / Testet',
-                    'Garanti': 'Inkludert'
-                },
-                description: desc || 'Høykvalitets apparat, testet og godkjent i henhold til standarder.'
+                categoryName: categoryName,
+                image: adminUploadedImages[0],
+                images: [...adminUploadedImages]
             };
 
             PRODUCTS_DATA.unshift(newProduct);
             saveProductsToStorage();
 
+            document.getElementById('admin-add-product-form').reset();
+            adminUploadedImages = [];
+            renderAdminImagePreviews();
+
+            renderAdminProductsList();
             renderFeaturedProducts();
             applyFilters();
-            renderAdminProductsList();
 
-            document.getElementById('admin-add-product-form').reset();
-            document.getElementById('admin-image-preview-box').classList.add('hidden');
-            compressedAdminImageData = null;
-
-            showToast('Produktet ble lagt til i katalogen!', 'fa-circle-check text-emerald-400');
+            showToast('Produktet ble lagt til!', 'fa-circle-check text-emerald-400');
         }
 
-        function promptDeleteAdminProduct(id) {
-            targetProductToDeleteId = id;
+        function renderAdminProductsList() {
+            const listContainer = document.getElementById('admin-products-list');
+            const badge = document.getElementById('admin-total-products-badge');
+            if (!listContainer) return;
+
+            if (badge) {
+                badge.innerText = PRODUCTS_DATA.length;
+            }
+
+            if (PRODUCTS_DATA.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-8 text-slate-400 text-xs">
+                        <i class="fa-solid fa-box-open text-2xl mb-2 block"></i>
+                        Ingen produkter i katalogen.
+                    </div>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = PRODUCTS_DATA.map(p => {
+                const pImages = getProductImages(p);
+                return `
+                    <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-100 rounded-2xl">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <img src="${pImages[0]}" alt="${p.title}" class="w-12 h-12 object-contain bg-white rounded-xl p-1 border border-slate-100 flex-shrink-0" onerror="this.src='https://placehold.co/100x100/e2e8f0/64748b?text=Appliance'">
+                            <div class="min-w-0">
+                                <h4 class="font-bold text-xs text-slate-800 truncate">${p.title}</h4>
+                                <div class="flex items-center gap-2 mt-0.5">
+                                    <span class="text-[10px] text-brand-600 font-medium">${p.categoryName || p.category}</span>
+                                    <span class="text-[9px] font-bold text-slate-500 bg-slate-200 px-1.5 py-0.2 rounded">${pImages.length} bilde${pImages.length > 1 ? 'r' : ''}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 flex-shrink-0 ml-2">
+                            <button onclick="openAdminEditModal('${p.id}')" title="Rediger" class="w-8 h-8 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-brand-600 flex items-center justify-center transition-all shadow-sm active:scale-95">
+                                <i class="fa-solid fa-pen text-xs"></i>
+                            </button>
+                            <button onclick="promptDeleteAdminProduct('${p.id}')" title="Slett" class="w-8 h-8 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-rose-600 flex items-center justify-center transition-all shadow-sm active:scale-95">
+                                <i class="fa-solid fa-trash text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function changeCardImage(productId, direction) {
+            const product = PRODUCTS_DATA.find(p => p.id === productId);
+            if (!product) return;
+            const images = getProductImages(product);
+            if (images.length <= 1) return;
+
+            let curIdx = cardImageIndices[productId] || 0;
+            curIdx = (curIdx + direction + images.length) % images.length;
+            cardImageIndices[productId] = curIdx;
+
+            const imgElem = document.getElementById(`card-img-${productId}`);
+            const counterElem = document.getElementById(`card-counter-${productId}`);
+            if (imgElem) {
+                imgElem.src = images[curIdx];
+            }
+            if (counterElem) {
+                counterElem.innerText = `${curIdx + 1}/${images.length}`;
+            }
+        }
+
+        function createProductCardHTML(product) {
+            const images = getProductImages(product);
+            const curIdx = cardImageIndices[product.id] || 0;
+            const currentImg = images[curIdx] || images[0];
+            const totalImgs = images.length;
+
+            return `
+                <div class="bg-white rounded-2xl border border-slate-100 p-3.5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-brand-50 text-brand-600">
+                            ${product.categoryName || getCategoryName(product.category)}
+                        </span>
+                        ${totalImgs > 1 ? `
+                            <span id="card-counter-${product.id}" class="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
+                                ${curIdx + 1}/${totalImgs}
+                            </span>
+                        ` : ''}
+                    </div>
+
+                    <!-- Image Display Box with Nav Arrows -->
+                    <div class="w-full h-44 bg-slate-50 rounded-xl overflow-hidden mb-3 flex items-center justify-center relative group/img">
+                        <img id="card-img-${product.id}" src="${currentImg}" alt="${product.title}" onclick="openProductModal('${product.id}')" class="h-full object-contain p-2 cursor-pointer group-hover/img:scale-[1.02] transition-transform" onerror="this.src='https://placehold.co/400x300/e2e8f0/64748b?text=Appliance'">
+                        
+                        ${totalImgs > 1 ? `
+                            <!-- Left Arrow -->
+                            <button onclick="event.stopPropagation(); changeCardImage('${product.id}', -1)" title="Forrige bilde" class="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/90 text-slate-700 shadow-md flex items-center justify-center hover:bg-white active:scale-95 transition-all text-xs z-10">
+                                <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                            </button>
+                            <!-- Right Arrow -->
+                            <button onclick="event.stopPropagation(); changeCardImage('${product.id}', 1)" title="Neste bilde" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/90 text-slate-700 shadow-md flex items-center justify-center hover:bg-white active:scale-95 transition-all text-xs z-10">
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+
+                    <div class="mb-3">
+                        <h3 onclick="openProductModal('${product.id}')" class="font-bold text-slate-800 text-sm leading-snug line-clamp-2 cursor-pointer hover:text-brand-600 transition-colors">
+                            ${product.title}
+                        </h3>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-50 mt-auto">
+                        <a href="tel:+4793467711" onclick="event.stopPropagation()" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20 text-xs font-bold transition-all cursor-pointer">
+                            <i class="fa-solid fa-phone text-xs"></i>
+                            <span>Ring for forespørsel</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* --- PRODUCT IMAGE MODAL & GALLERY SLIDER --- */
+        function openProductModal(productId) {
+            const product = PRODUCTS_DATA.find(p => p.id === productId);
+            if (!product) return;
+
+            modalCurrentProduct = product;
+            modalCurrentImageIndex = cardImageIndices[productId] || 0;
+
+            document.getElementById('modal-title').innerText = product.title;
+            updateModalGallery();
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function updateModalGallery() {
+            if (!modalCurrentProduct) return;
+            const images = getProductImages(modalCurrentProduct);
+            
+            if (modalCurrentImageIndex >= images.length) modalCurrentImageIndex = 0;
+            if (modalCurrentImageIndex < 0) modalCurrentImageIndex = images.length - 1;
+
+            const modalImg = document.getElementById('modal-image');
+            const counterBadge = document.getElementById('modal-image-counter');
+            const prevBtn = document.getElementById('modal-prev-btn');
+            const nextBtn = document.getElementById('modal-next-btn');
+            const thumbsContainer = document.getElementById('modal-thumbnails-container');
+
+            if (modalImg) modalImg.src = images[modalCurrentImageIndex];
+            if (counterBadge) counterBadge.innerText = `${modalCurrentImageIndex + 1} / ${images.length}`;
+
+            if (images.length > 1) {
+                if (prevBtn) prevBtn.classList.remove('hidden');
+                if (nextBtn) nextBtn.classList.remove('hidden');
+                if (counterBadge) counterBadge.classList.remove('hidden');
+
+                if (thumbsContainer) {
+                    thumbsContainer.innerHTML = images.map((imgUrl, idx) => `
+                        <button onclick="setModalImageIndex(${idx})" class="w-12 h-12 rounded-xl overflow-hidden border-2 transition-all p-0.5 bg-slate-50 flex-shrink-0 ${idx === modalCurrentImageIndex ? 'border-brand-500 scale-105 shadow-sm' : 'border-slate-200 opacity-60 hover:opacity-100'}">
+                            <img src="${imgUrl}" class="w-full h-full object-contain">
+                        </button>
+                    `).join('');
+                    thumbsContainer.classList.remove('hidden');
+                }
+            } else {
+                if (prevBtn) prevBtn.classList.add('hidden');
+                if (nextBtn) nextBtn.classList.add('hidden');
+                if (counterBadge) counterBadge.classList.add('hidden');
+                if (thumbsContainer) {
+                    thumbsContainer.innerHTML = '';
+                    thumbsContainer.classList.add('hidden');
+                }
+            }
+        }
+
+        function modalNextImage() {
+            if (!modalCurrentProduct) return;
+            const images = getProductImages(modalCurrentProduct);
+            if (images.length <= 1) return;
+            modalCurrentImageIndex = (modalCurrentImageIndex + 1) % images.length;
+            updateModalGallery();
+        }
+
+        function modalPrevImage() {
+            if (!modalCurrentProduct) return;
+            const images = getProductImages(modalCurrentProduct);
+            if (images.length <= 1) return;
+            modalCurrentImageIndex = (modalCurrentImageIndex - 1 + images.length) % images.length;
+            updateModalGallery();
+        }
+
+        function setModalImageIndex(idx) {
+            modalCurrentImageIndex = idx;
+            updateModalGallery();
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            modalCurrentProduct = null;
+        }
+
+        function openAdminEditModal(productId) {
+            const p = PRODUCTS_DATA.find(item => item.id === productId);
+            if (!p) return;
+
+            document.getElementById('edit-p-id').value = p.id;
+            document.getElementById('edit-p-title').value = p.title;
+            
+            populateCategoryDropdowns();
+            const editSelect = document.getElementById('edit-p-category');
+            if (editSelect) editSelect.value = p.category;
+
+            editUploadedImages = getProductImages(p).slice(0, 4);
+            renderEditImagePreviews();
+
+            document.getElementById('admin-edit-modal').classList.remove('hidden');
+        }
+
+        function closeAdminEditModal() {
+            document.getElementById('admin-edit-modal').classList.add('hidden');
+        }
+
+        function handleAdminEditProduct(event) {
+            event.preventDefault();
+            const id = document.getElementById('edit-p-id').value;
+            const title = document.getElementById('edit-p-title').value.trim();
+            const category = document.getElementById('edit-p-category').value;
+            const categoryName = getCategoryName(category);
+
+            if (editUploadedImages.length === 0) {
+                showToast('Vennligst velg minst ett produktbilde', 'fa-triangle-exclamation text-amber-400');
+                return;
+            }
+
+            const index = PRODUCTS_DATA.findIndex(p => p.id === id);
+            if (index !== -1) {
+                PRODUCTS_DATA[index].title = title;
+                PRODUCTS_DATA[index].category = category;
+                PRODUCTS_DATA[index].categoryName = categoryName;
+                PRODUCTS_DATA[index].image = editUploadedImages[0];
+                PRODUCTS_DATA[index].images = [...editUploadedImages];
+
+                saveProductsToStorage();
+
+                renderAdminProductsList();
+                renderFeaturedProducts();
+                applyFilters();
+
+                closeAdminEditModal();
+                showToast('Endringene ble lagret!', 'fa-circle-check text-emerald-400');
+            }
+        }
+
+        function promptDeleteAdminProduct(productId) {
+            targetProductToDeleteId = productId;
             document.getElementById('admin-delete-modal').classList.remove('hidden');
         }
 
@@ -984,405 +1325,59 @@
 
         function confirmDeleteAdminProduct() {
             if (!targetProductToDeleteId) return;
+
             PRODUCTS_DATA = PRODUCTS_DATA.filter(p => p.id !== targetProductToDeleteId);
             saveProductsToStorage();
+
+            renderAdminProductsList();
             renderFeaturedProducts();
             applyFilters();
-            renderAdminProductsList();
+
             closeAdminDeleteModal();
-            showToast('Produktet ble slettet fra katalogen', 'fa-trash-can text-rose-400');
+            showToast('Produktet ble slettet', 'fa-trash-can text-rose-400');
         }
 
-        function openAdminEditModal(id) {
-            const p = PRODUCTS_DATA.find(item => item.id === id);
-            if (!p) return;
-            
-            document.getElementById('edit-p-id').value = p.id;
-            document.getElementById('edit-p-title').value = p.title;
-            document.getElementById('edit-p-category').value = p.category;
-            document.getElementById('edit-p-price').value = p.price;
-            document.getElementById('edit-p-capacity').value = p.specs?.['Kapasitet'] || p.specs?.['Spesifikasjon'] || p.specs?.['Total kapasitet'] || '';
-            document.getElementById('edit-p-desc').value = p.description || '';
-            document.getElementById('edit-image-preview').src = p.image;
-            compressedEditImageData = p.image;
+        function showToast(message, iconClass = 'fa-circle-check text-emerald-400') {
+            const toast = document.getElementById('custom-toast');
+            const msgElem = document.getElementById('toast-message');
+            const iconElem = document.getElementById('toast-icon');
 
-            document.getElementById('admin-edit-modal').classList.remove('hidden');
+            if (!toast || !msgElem) return;
+
+            msgElem.innerText = message;
+            if (iconElem) iconElem.className = `fa-solid ${iconClass} text-base`;
+
+            toast.classList.remove('-translate-y-12', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('-translate-y-12', 'opacity-0', 'pointer-events-none');
+            }, 3000);
         }
 
-        function closeAdminEditModal() {
-            document.getElementById('admin-edit-modal').classList.add('hidden');
-            compressedEditImageData = null;
-        }
-
-        function previewAndCompressEditImage(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = new Image();
-                img.onload = function () {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    const MAX_WIDTH = 800;
-                    const MAX_HEIGHT = 800;
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height) {
-                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-                    } else {
-                        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    compressedEditImageData = canvas.toDataURL('image/jpeg', 0.8);
-                    document.getElementById('edit-image-preview').src = compressedEditImageData;
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function handleAdminEditProduct(e) {
-            e.preventDefault();
-            const id = document.getElementById('edit-p-id').value;
-            const index = PRODUCTS_DATA.findIndex(p => p.id === id);
-            if (index === -1) return;
-
-            const title = document.getElementById('edit-p-title').value.trim();
-            const category = document.getElementById('edit-p-category').value;
-            const price = document.getElementById('edit-p-price').value.trim();
-            const capacity = document.getElementById('edit-p-capacity').value.trim();
-            const desc = document.getElementById('edit-p-desc').value.trim();
-
-            const categoryNames = {
-                'washing': 'Vaskemaskiner',
-                'dryer': 'Tørketromler',
-                'fridge': 'Kjøleskap',
-                'stove': 'Komfyrer'
-            };
-
-            PRODUCTS_DATA[index] = {
-                ...PRODUCTS_DATA[index],
-                title: title,
-                category: category,
-                categoryName: categoryNames[category] || 'Hvitevarer',
-                price: price.includes('Kr') ? price : `${price} Kr`,
-                numericPrice: parseInt(price.replace(/[^0-9]/g, '')) || 5000,
-                image: compressedEditImageData || PRODUCTS_DATA[index].image,
-                specs: {
-                    ...PRODUCTS_DATA[index].specs,
-                    'Kapasitet': capacity || PRODUCTS_DATA[index].specs?.['Kapasitet'] || 'Utmerket'
-                },
-                description: desc
-            };
-
-            saveProductsToStorage();
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCustomCategories();
+            loadProductsFromStorage();
+            populateCategoryDropdowns();
+            renderCategoryFilterButtons();
             renderFeaturedProducts();
-            applyFilters();
+            renderCatalogProducts();
             renderAdminProductsList();
-            closeAdminEditModal();
-            showToast('Produktinformasjonen ble oppdatert', 'fa-pen-to-square text-brand-400');
-        }
+            renderAdminImagePreviews();
 
-        function renderAdminProductsList() {
-            const container = document.getElementById('admin-products-list');
-            const badge = document.getElementById('admin-total-products-badge');
-            if (badge) badge.innerText = PRODUCTS_DATA.length;
-
-            if (PRODUCTS_DATA.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Ingen produkter ennå</p>`;
-                return;
-            }
-
-            container.innerHTML = PRODUCTS_DATA.map(p => `
-                <div class="p-2.5 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between gap-2 hover:bg-slate-100/60 transition-colors">
-                    <img src="${p.image}" class="w-10 h-10 object-contain bg-white rounded-lg border border-slate-100 p-0.5 flex-shrink-0">
-                    <div class="min-w-0 flex-grow">
-                        <h4 class="font-bold text-xs text-slate-800 truncate">${p.title}</h4>
-                        <div class="text-[10px] text-slate-400 flex items-center gap-2">
-                            <span>${p.categoryName}</span>
-                            <span>•</span>
-                            <span class="font-bold text-brand-600">${p.price}</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-1 flex-shrink-0">
-                        <button onclick="openAdminEditModal('${p.id}')" class="w-7 h-7 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center hover:bg-brand-100 transition-colors" title="Rediger">
-                            <i class="fa-solid fa-pen-to-square text-xs"></i>
-                        </button>
-                        <button onclick="promptDeleteAdminProduct('${p.id}')" class="w-7 h-7 bg-rose-50 text-rose-500 rounded-lg flex items-center justify-center hover:bg-rose-100 transition-colors" title="Slett">
-                            <i class="fa-solid fa-trash-can text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterCategoryAndSwitch(cat) {
-            setCategoryFilter(cat);
-            switchTab('products');
-        }
-
-        function setCategoryFilter(cat) {
-            currentFilter = cat;
-            
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-brand-500', 'text-white');
-                btn.classList.add('bg-slate-100', 'text-slate-600');
-            });
-
-            const activeBtn = document.getElementById(`filter-btn-${cat}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
-                activeBtn.classList.add('bg-brand-500', 'text-white');
-            }
-
-            applyFilters();
-        }
-
-        function applyFilters() {
-            const searchQuery = document.getElementById('product-search-input').value.toLowerCase().trim();
-            const container = document.getElementById('products-catalog-grid');
-            const noMsg = document.getElementById('no-products-msg');
-
-            const filtered = PRODUCTS_DATA.filter(p => {
-                const matchesCat = (currentFilter === 'all') || (p.category === currentFilter);
-                const matchesSearch = p.title.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery);
-                return matchesCat && matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                container.innerHTML = '';
-                noMsg.classList.remove('hidden');
+            if (window.location.hash === '#Hider') {
+                switchTab('admin');
             } else {
-                noMsg.classList.add('hidden');
-                container.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+                switchTab('home');
             }
-        }
+        });
 
-        function resetFilters() {
-            document.getElementById('product-search-input').value = '';
-            setCategoryFilter('all');
-        }
-
-        function renderFeaturedProducts() {
-            const container = document.getElementById('featured-products-grid');
-            const featuredList = PRODUCTS_DATA.slice(0, 3);
-            container.innerHTML = featuredList.map(p => createProductCardHTML(p)).join('');
-        }
-
-        function renderCatalogProducts() {
-            applyFilters();
-        }
-
-        function createProductCardHTML(product) {
-            return `
-                <div class="bg-white rounded-2xl border border-slate-100 p-3.5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative">
-                    <!-- Category Badge -->
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-brand-50 text-brand-600">
-                            ${product.categoryName}
-                        </span>
-                    </div>
-
-                    <!-- Image -->
-                    <div onclick="openProductModal('${product.id}')" class="w-full h-44 bg-slate-50 rounded-xl overflow-hidden mb-3 flex items-center justify-center cursor-pointer relative group-hover:scale-[1.02] transition-transform">
-                        <img src="${product.image}" alt="${product.title}" class="h-full object-contain p-2" onerror="this.src='https://placehold.co/400x300/e2e8f0/64748b?text=Appliance'">
-                    </div>
-
-                    <!-- Title & Spec preview -->
-                    <div class="space-y-1 mb-3">
-                        <h3 onclick="openProductModal('${product.id}')" class="font-bold text-slate-800 text-sm leading-snug line-clamp-2 cursor-pointer hover:text-brand-600 transition-colors">
-                            ${product.title}
-                        </h3>
-                        <p class="text-[11px] text-slate-400 line-clamp-1">
-                            ${Object.entries(product.specs).map(([k, v]) => `${k}: ${v}`).join(' • ')}
-                        </p>
-                    </div>
-
-                    <!-- Price & Add Button (+) -->
-                    <div class="flex items-center justify-between pt-2 border-t border-slate-50 mt-auto">
-                        <div>
-                            <span class="text-[10px] text-slate-400 block leading-none">Pris</span>
-                            <span class="text-base font-black text-slate-800">${product.price}</span>
-                        </div>
-
-                        <!-- PLUS (+) BUTTON FOR QUICK ADD TO CART -->
-                        <button onclick="addToCart('${product.id}', event)" class="w-10 h-10 rounded-xl bg-brand-500 hover:bg-brand-600 active:scale-95 text-white flex items-center justify-center shadow-md shadow-brand-500/20 transition-all cursor-pointer" title="Legg i handlekurv">
-                            <i class="fa-solid fa-plus text-base font-bold"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function openProductModal(productId) {
-            const product = PRODUCTS_DATA.find(p => p.id === productId);
-            if (!product) return;
-
-            document.getElementById('modal-category-badge').innerText = product.categoryName;
-            document.getElementById('modal-title').innerText = product.title;
-            document.getElementById('modal-image').src = product.image;
-            document.getElementById('modal-price').innerText = product.price;
-            document.getElementById('modal-description').innerText = product.description;
-
-            const specsContainer = document.getElementById('modal-specs-list');
-            specsContainer.innerHTML = Object.entries(product.specs).map(([key, val]) => `
-                <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 flex flex-col">
-                    <span class="text-slate-400 text-[10px]">${key}</span>
-                    <span class="font-bold text-slate-700">${val}</span>
-                </div>
-            `).join('');
-
-            const addBtn = document.getElementById('modal-add-btn');
-            addBtn.onclick = (e) => {
-                addToCart(product.id, e);
-                closeProductModal();
-            };
-
-            document.getElementById('product-modal').classList.remove('hidden');
-        }
-
-        function closeProductModal() {
-            document.getElementById('product-modal').classList.add('hidden');
-        }
-
-        function addToCart(productId, event) {
-            if (event) event.stopPropagation();
-
-            const product = PRODUCTS_DATA.find(p => p.id === productId);
-            if (!product) return;
-
-            const existing = cart.find(item => item.id === productId);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ ...product, quantity: 1 });
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash === '#Hider') {
+                switchTab('admin');
             }
-
-            updateCartUI();
-            
-            const badges = [document.getElementById('cart-count-badge'), document.getElementById('mob-cart-badge')];
-            badges.forEach(b => {
-                if (b) {
-                    b.classList.add('cart-badge-bounce');
-                    setTimeout(() => b.classList.remove('cart-badge-bounce'), 300);
-                }
-            });
-        }
-
-        function updateCartQuantity(productId, delta) {
-            const idx = cart.findIndex(item => item.id === productId);
-            if (idx !== -1) {
-                cart[idx].quantity += delta;
-                if (cart[idx].quantity <= 0) {
-                    cart.splice(idx, 1);
-                }
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const totalItemsCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);
-
-            document.getElementById('cart-count-badge').innerText = totalItemsCount;
-            document.getElementById('mob-cart-badge').innerText = totalItemsCount;
-
-            const container = document.getElementById('cart-items-container');
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-slate-400 space-y-2">
-                        <i class="fa-solid fa-cart-flatbed text-4xl text-slate-300"></i>
-                        <p class="font-bold text-sm">Handlekurven er tom</p>
-                        <p class="text-xs">Legg til vaskemaskiner, tørketromler, kjøleskap eller komfyrer nå.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = cart.map(item => `
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center justify-between gap-3">
-                    <img src="${item.image}" alt="${item.title}" class="w-12 h-12 object-contain bg-white rounded-lg p-1 border border-slate-100">
-                    
-                    <div class="flex-grow min-w-0">
-                        <h4 class="font-bold text-xs text-slate-800 truncate">${item.title}</h4>
-                        <span class="text-[10px] text-slate-400">${item.categoryName}</span>
-                    </div>
-
-                    <div class="flex items-center border border-slate-200 rounded-lg bg-white overflow-hidden">
-                        <button onclick="updateCartQuantity('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold">-</button>
-                        <span class="px-2 text-xs font-bold text-slate-800">${item.quantity}</span>
-                        <button onclick="updateCartQuantity('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold">+</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function toggleCartModal(show) {
-            const drawer = document.getElementById('cart-drawer');
-            if (show) {
-                drawer.classList.remove('hidden');
-            } else {
-                drawer.classList.add('hidden');
-            }
-        }
-
-        // SUBMIT ORDER VIA SMS (NORWEGIAN NUMBER) - WITHOUT MENTIONING PRICES
-        function submitOrderViaSMS() {
-            if (cart.length === 0) {
-                showToast('Handlekurven er tom! Vennligst legg til produkter først.', 'fa-triangle-exclamation text-amber-400');
-                return;
-            }
-
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-            const address = document.getElementById('cust-address').value.trim();
-
-            if (!name || !phone || !address) {
-                showToast('Vennligst fyll ut all leveringsinformasjon (navn, telefon og adresse).', 'fa-triangle-exclamation text-amber-400');
-                return;
-            }
-
-            // Create SMS text without ANY prices included
-            let smsMessage = `Hei Laksevåg Hvitevarer,\n`;
-            smsMessage += `Jeg ønsker å bestille følgende:\n\n`;
-
-            cart.forEach((item, index) => {
-                smsMessage += `${index + 1}. ${item.title} (Antall: ${item.quantity})\n`;
-            });
-
-            smsMessage += `\nKundemottaker:\n`;
-            smsMessage += `Navn: ${name}\n`;
-            smsMessage += `Telefon: ${phone}\n`;
-            smsMessage += `Adresse: ${address}\n\n`;
-            smsMessage += `Vennligst bekreft og motta bestillingen. Takk!`;
-
-            const encodedBody = encodeURIComponent(smsMessage);
-            const smsURI = `sms:${NORWEGIAN_SMS_NUMBER}?body=${encodedBody}`;
-
-            // Populate Confirmation Popup WITHOUT ANY PRICES
-            const confirmList = document.getElementById('confirm-items-list');
-            confirmList.innerHTML = cart.map(item => `
-                <li><strong>${item.title}</strong> - Antall: ${item.quantity}</li>
-            `).join('');
-
-            document.getElementById('confirm-cust-name').innerText = name;
-            document.getElementById('confirm-cust-address').innerText = address;
-            document.getElementById('sms-direct-link').href = smsURI;
-
-            toggleCartModal(false);
-            document.getElementById('confirm-modal').classList.remove('hidden');
-        }
-
-        function closeConfirmModal() {
-            document.getElementById('confirm-modal').classList.add('hidden');
-        }
+        });
     </script>
 </body>
 </html>
