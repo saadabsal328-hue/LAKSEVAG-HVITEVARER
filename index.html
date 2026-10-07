@@ -493,69 +493,124 @@
         </button>
     </div>
 
-    <script>
-        const NORWEGIAN_SMS_NUMBER = "+4793467711";
+    <!-- FIREBASE & APPLICATION LOGIC MODULE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, collection, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        const NORWEGIAN_SMS_NUMBER = "+4793467711";
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'laksevaag-store-app';
+        
+        // Real User-provided Firebase Configuration
+        const myFirebaseConfig = {
+            apiKey: "AIzaSyDPZZQZy2-mMbzeFutCyhcKrgoDtPGeOlg",
+            authDomain: "laksevag-115a8.firebaseapp.com",
+            projectId: "laksevag-115a8",
+            storageBucket: "laksevag-115a8.firebasestorage.app",
+            messagingSenderId: "227029877091",
+            appId: "1:227029877091:web:794dccfe6db9f8c8121356",
+            measurementId: "G-PDK18Y35HQ"
+        };
+
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? (typeof __firebase_config === 'string' ? JSON.parse(__firebase_config) : __firebase_config)
+            : myFirebaseConfig;
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
         let targetProductToDeleteId = null;
         let targetCategoryToDeleteId = null;
         let categoryDeleteContext = null;
-        
+
         let adminUploadedImages = [];
         let editUploadedImages = [];
-        let cardImageIndices = {}; // productId -> currentIndex
+        let cardImageIndices = {};
         let currentFilter = 'all';
 
         let modalCurrentProduct = null;
         let modalCurrentImageIndex = 0;
-        
-        // Dynamic All Categories List
-        let ALL_CATEGORIES = [
+
+        const DEFAULT_CATEGORIES = [
             { id: 'washing', name: 'Vaskemaskiner' },
             { id: 'dryer', name: 'Tørketromler' },
             { id: 'fridge', name: 'Kjøleskap' },
             { id: 'stove', name: 'Komfyrer' }
         ];
 
+        let ALL_CATEGORIES = [...DEFAULT_CATEGORIES];
+
+        const DEFAULT_PRODUCTS = [];
+
+        let PRODUCTS_DATA = [];
         let activeCategoryContext = null;
         let lastSelectedCategory = { admin: 'washing', edit: 'washing' };
 
-        // Default Initial Catalog
-        const DEFAULT_PRODUCTS = [
-            {
-                id: 'prod-1',
-                title: 'Bosch Serie 4 Vaskemaskin 8kg',
-                category: 'washing',
-                categoryName: 'Vaskemaskiner',
-                image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80',
-                images: ['https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80']
-            },
-            {
-                id: 'prod-2',
-                title: 'Miele T1 Varmepumpetørketrommel 8kg',
-                category: 'dryer',
-                categoryName: 'Tørketromler',
-                image: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=500&q=80',
-                images: ['https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=500&q=80']
-            },
-            {
-                id: 'prod-3',
-                title: 'Samsung NoFrost Kombiskap 340L',
-                category: 'fridge',
-                categoryName: 'Kjøleskap',
-                image: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=500&q=80',
-                images: ['https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=500&q=80']
-            },
-            {
-                id: 'prod-4',
-                title: 'Electrolux Induksjonskomfyr 60cm',
-                category: 'stove',
-                categoryName: 'Komfyrer',
-                image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500&q=80',
-                images: ['https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500&q=80']
+        async function initFirebaseAndSync() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const userCred = await signInWithCustomToken(auth, __initial_auth_token);
+                    currentUser = userCred.user;
+                } else {
+                    const userCred = await signInAnonymously(auth);
+                    currentUser = userCred.user;
+                }
+            } catch (err) {
+                console.error("Auth initialization error:", err);
+                try {
+                    const userCred = await signInAnonymously(auth);
+                    currentUser = userCred.user;
+                } catch (e) {
+                    console.error("Fallback anonymous auth error:", e);
+                }
             }
-        ];
 
-        let PRODUCTS_DATA = [];
+            if (!currentUser) return;
+
+            const categoriesRef = collection(db, 'artifacts', appId, 'public', 'data', 'categories');
+            const productsRef = collection(db, 'artifacts', appId, 'public', 'data', 'products');
+
+            // Realtime categories sync
+            onSnapshot(categoriesRef, async (snapshot) => {
+                if (snapshot.empty) {
+                    for (const cat of DEFAULT_CATEGORIES) {
+                        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'categories', cat.id), cat);
+                    }
+                    return;
+                }
+                ALL_CATEGORIES = [];
+                snapshot.forEach(docSnap => {
+                    ALL_CATEGORIES.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                
+                populateCategoryDropdowns();
+                renderCategoryFilterButtons();
+                renderFeaturedProducts();
+                applyFilters();
+                renderAdminProductsList();
+            }, (error) => {
+                console.error("Categories snapshot error:", error);
+            });
+
+            // Realtime products sync
+            onSnapshot(productsRef, async (snapshot) => {
+                PRODUCTS_DATA = [];
+                if (!snapshot.empty) {
+                    snapshot.forEach(docSnap => {
+                        PRODUCTS_DATA.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                }
+
+                renderAdminProductsList();
+                renderFeaturedProducts();
+                applyFilters();
+            }, (error) => {
+                console.error("Products snapshot error:", error);
+            });
+        }
 
         function getProductImages(product) {
             if (product.images && Array.isArray(product.images) && product.images.length > 0) {
@@ -611,42 +666,6 @@
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function loadProductsFromStorage() {
-            const stored = localStorage.getItem('laksevaag_products_data');
-            if (stored) {
-                try {
-                    PRODUCTS_DATA = JSON.parse(stored);
-                } catch(e) {
-                    PRODUCTS_DATA = [...DEFAULT_PRODUCTS];
-                }
-            } else {
-                PRODUCTS_DATA = [...DEFAULT_PRODUCTS];
-                saveProductsToStorage();
-            }
-        }
-
-        function saveProductsToStorage() {
-            localStorage.setItem('laksevaag_products_data', JSON.stringify(PRODUCTS_DATA));
-        }
-
-        function loadCustomCategories() {
-            const stored = localStorage.getItem('laksevaag_all_categories');
-            if (stored) {
-                try {
-                    const parsed = JSON.parse(stored);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
-                        ALL_CATEGORIES = parsed;
-                    }
-                } catch(e) {
-                    console.error(e);
-                }
-            }
-        }
-
-        function saveCustomCategories() {
-            localStorage.setItem('laksevaag_all_categories', JSON.stringify(ALL_CATEGORIES));
         }
 
         function getCategoryName(catId) {
@@ -733,41 +752,38 @@
             document.getElementById('delete-category-modal').classList.add('hidden');
         }
 
-        function confirmDeleteCategory() {
-            if (!targetCategoryToDeleteId) return;
+        async function confirmDeleteCategory() {
+            if (!targetCategoryToDeleteId || !currentUser) return;
 
             const catName = getCategoryName(targetCategoryToDeleteId);
 
-            ALL_CATEGORIES = ALL_CATEGORIES.filter(c => c.id !== targetCategoryToDeleteId);
-            saveCustomCategories();
+            try {
+                // Delete category from Firestore
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'categories', targetCategoryToDeleteId));
 
-            const fallbackCatId = ALL_CATEGORIES.length > 0 ? ALL_CATEGORIES[0].id : 'washing';
-            const fallbackCatName = ALL_CATEGORIES.length > 0 ? ALL_CATEGORIES[0].name : 'Vaskemaskiner';
+                // Re-assign remaining products to fallback category
+                const remainingCats = ALL_CATEGORIES.filter(c => c.id !== targetCategoryToDeleteId);
+                const fallbackCatId = remainingCats.length > 0 ? remainingCats[0].id : 'washing';
+                const fallbackCatName = remainingCats.length > 0 ? remainingCats[0].name : 'Vaskemaskiner';
 
-            let updatedProducts = false;
-            PRODUCTS_DATA.forEach(p => {
-                if (p.category === targetCategoryToDeleteId) {
-                    p.category = fallbackCatId;
-                    p.categoryName = fallbackCatName;
-                    updatedProducts = true;
+                for (const p of PRODUCTS_DATA) {
+                    if (p.category === targetCategoryToDeleteId) {
+                        p.category = fallbackCatId;
+                        p.categoryName = fallbackCatName;
+                        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'products', p.id), p);
+                    }
                 }
-            });
-            if (updatedProducts) {
-                saveProductsToStorage();
+
+                if (currentFilter === targetCategoryToDeleteId) {
+                    currentFilter = 'all';
+                }
+
+                closeDeleteCategoryModal();
+                showToast(`Kategorien "${catName}" ble slettet`, 'fa-trash-can text-rose-400');
+            } catch (err) {
+                console.error("Error deleting category:", err);
+                showToast('Feil ved sletting av kategori', 'fa-triangle-exclamation text-amber-400');
             }
-
-            if (currentFilter === targetCategoryToDeleteId) {
-                currentFilter = 'all';
-            }
-
-            populateCategoryDropdowns();
-            renderCategoryFilterButtons();
-            renderFeaturedProducts();
-            applyFilters();
-            renderAdminProductsList();
-
-            closeDeleteCategoryModal();
-            showToast(`Kategorien "${catName}" ble slettet`, 'fa-trash-can text-rose-400');
         }
 
         function closeAddCategoryModal() {
@@ -775,7 +791,7 @@
             activeCategoryContext = null;
         }
 
-        function saveNewCategoryFromModal() {
+        async function saveNewCategoryFromModal() {
             const input = document.getElementById('new-category-name-input');
             const catName = input ? input.value.trim() : '';
 
@@ -784,33 +800,36 @@
                 return;
             }
 
+            if (!currentUser) return;
+
             const catId = 'cat-' + Date.now();
             const newCat = { id: catId, name: catName };
 
-            ALL_CATEGORIES.push(newCat);
-            saveCustomCategories();
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'categories', catId), newCat);
 
-            populateCategoryDropdowns();
-            renderCategoryFilterButtons();
+                if (activeCategoryContext === 'admin') {
+                    const adminSelect = document.getElementById('admin-p-category');
+                    if (adminSelect) {
+                        adminSelect.value = catId;
+                        lastSelectedCategory['admin'] = catId;
+                        updateDeleteCatBtnVisibility('admin');
+                    }
+                } else if (activeCategoryContext === 'edit') {
+                    const editSelect = document.getElementById('edit-p-category');
+                    if (editSelect) {
+                        editSelect.value = catId;
+                        lastSelectedCategory['edit'] = catId;
+                        updateDeleteCatBtnVisibility('edit');
+                    }
+                }
 
-            if (activeCategoryContext === 'admin') {
-                const adminSelect = document.getElementById('admin-p-category');
-                if (adminSelect) {
-                    adminSelect.value = catId;
-                    lastSelectedCategory['admin'] = catId;
-                    updateDeleteCatBtnVisibility('admin');
-                }
-            } else if (activeCategoryContext === 'edit') {
-                const editSelect = document.getElementById('edit-p-category');
-                if (editSelect) {
-                    editSelect.value = catId;
-                    lastSelectedCategory['edit'] = catId;
-                    updateDeleteCatBtnVisibility('edit');
-                }
+                closeAddCategoryModal();
+                showToast(`Kategorien "${catName}" ble lagt til!`, 'fa-circle-check text-emerald-400');
+            } catch (err) {
+                console.error("Error saving category:", err);
+                showToast('Feil ved lagring av kategori', 'fa-triangle-exclamation text-amber-400');
             }
-
-            closeAddCategoryModal();
-            showToast(`Kategorien "${catName}" ble lagt til!`, 'fa-circle-check text-emerald-400');
         }
 
         function renderCategoryFilterButtons() {
@@ -915,7 +934,6 @@
             reader.readAsDataURL(file);
         }
 
-        /* --- ADMIN MULTI-IMAGE UPLOADER (MAX 4 IMAGES) --- */
         function handleAdminImagesUpload(event) {
             const files = Array.from(event.target.files);
             if (!files || files.length === 0) return;
@@ -974,7 +992,6 @@
             renderAdminImagePreviews();
         }
 
-        /* --- EDIT MULTI-IMAGE UPLOADER (MAX 4 IMAGES) --- */
         function handleEditImagesUpload(event) {
             const files = Array.from(event.target.files);
             if (!files || files.length === 0) return;
@@ -1029,8 +1046,10 @@
             renderEditImagePreviews();
         }
 
-        function handleAdminAddProduct(event) {
+        async function handleAdminAddProduct(event) {
             event.preventDefault();
+            if (!currentUser) return;
+
             const title = document.getElementById('admin-p-title').value.trim();
             const catSelect = document.getElementById('admin-p-category');
             const category = catSelect.value;
@@ -1050,18 +1069,18 @@
                 images: [...adminUploadedImages]
             };
 
-            PRODUCTS_DATA.unshift(newProduct);
-            saveProductsToStorage();
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'products', newProduct.id), newProduct);
 
-            document.getElementById('admin-add-product-form').reset();
-            adminUploadedImages = [];
-            renderAdminImagePreviews();
+                document.getElementById('admin-add-product-form').reset();
+                adminUploadedImages = [];
+                renderAdminImagePreviews();
 
-            renderAdminProductsList();
-            renderFeaturedProducts();
-            applyFilters();
-
-            showToast('Produktet ble lagt til!', 'fa-circle-check text-emerald-400');
+                showToast('Produktet ble lagt til!', 'fa-circle-check text-emerald-400');
+            } catch (err) {
+                console.error("Error adding product:", err);
+                showToast('Feil ved lagring av produkt', 'fa-triangle-exclamation text-amber-400');
+            }
         }
 
         function renderAdminProductsList() {
@@ -1181,7 +1200,6 @@
             `;
         }
 
-        /* --- PRODUCT IMAGE MODAL & GALLERY SLIDER --- */
         function openProductModal(productId) {
             const product = PRODUCTS_DATA.find(p => p.id === productId);
             if (!product) return;
@@ -1282,8 +1300,10 @@
             document.getElementById('admin-edit-modal').classList.add('hidden');
         }
 
-        function handleAdminEditProduct(event) {
+        async function handleAdminEditProduct(event) {
             event.preventDefault();
+            if (!currentUser) return;
+
             const id = document.getElementById('edit-p-id').value;
             const title = document.getElementById('edit-p-title').value.trim();
             const category = document.getElementById('edit-p-category').value;
@@ -1294,22 +1314,22 @@
                 return;
             }
 
-            const index = PRODUCTS_DATA.findIndex(p => p.id === id);
-            if (index !== -1) {
-                PRODUCTS_DATA[index].title = title;
-                PRODUCTS_DATA[index].category = category;
-                PRODUCTS_DATA[index].categoryName = categoryName;
-                PRODUCTS_DATA[index].image = editUploadedImages[0];
-                PRODUCTS_DATA[index].images = [...editUploadedImages];
+            const updatedProduct = {
+                id: id,
+                title: title,
+                category: category,
+                categoryName: categoryName,
+                image: editUploadedImages[0],
+                images: [...editUploadedImages]
+            };
 
-                saveProductsToStorage();
-
-                renderAdminProductsList();
-                renderFeaturedProducts();
-                applyFilters();
-
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'products', id), updatedProduct);
                 closeAdminEditModal();
                 showToast('Endringene ble lagret!', 'fa-circle-check text-emerald-400');
+            } catch (err) {
+                console.error("Error updating product:", err);
+                showToast('Feil ved oppdatering av produkt', 'fa-triangle-exclamation text-amber-400');
             }
         }
 
@@ -1323,18 +1343,17 @@
             document.getElementById('admin-delete-modal').classList.add('hidden');
         }
 
-        function confirmDeleteAdminProduct() {
-            if (!targetProductToDeleteId) return;
+        async function confirmDeleteAdminProduct() {
+            if (!targetProductToDeleteId || !currentUser) return;
 
-            PRODUCTS_DATA = PRODUCTS_DATA.filter(p => p.id !== targetProductToDeleteId);
-            saveProductsToStorage();
-
-            renderAdminProductsList();
-            renderFeaturedProducts();
-            applyFilters();
-
-            closeAdminDeleteModal();
-            showToast('Produktet ble slettet', 'fa-trash-can text-rose-400');
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'products', targetProductToDeleteId));
+                closeAdminDeleteModal();
+                showToast('Produktet ble slettet', 'fa-trash-can text-rose-400');
+            } catch (err) {
+                console.error("Error deleting product:", err);
+                showToast('Feil ved sletting av produkt', 'fa-triangle-exclamation text-amber-400');
+            }
         }
 
         function showToast(message, iconClass = 'fa-circle-check text-emerald-400') {
@@ -1356,15 +1375,36 @@
             }, 3000);
         }
 
+        window.switchTab = switchTab;
+        window.filterCategoryAndSwitch = filterCategoryAndSwitch;
+        window.handleCategorySelectChange = handleCategorySelectChange;
+        window.promptDeleteCategory = promptDeleteCategory;
+        window.closeDeleteCategoryModal = closeDeleteCategoryModal;
+        window.confirmDeleteCategory = confirmDeleteCategory;
+        window.closeAddCategoryModal = closeAddCategoryModal;
+        window.saveNewCategoryFromModal = saveNewCategoryFromModal;
+        window.setCategoryFilter = setCategoryFilter;
+        window.resetFilters = resetFilters;
+        window.handleAdminImagesUpload = handleAdminImagesUpload;
+        window.removeAdminImage = removeAdminImage;
+        window.handleEditImagesUpload = handleEditImagesUpload;
+        window.removeEditImage = removeEditImage;
+        window.handleAdminAddProduct = handleAdminAddProduct;
+        window.openAdminEditModal = openAdminEditModal;
+        window.closeAdminEditModal = closeAdminEditModal;
+        window.handleAdminEditProduct = handleAdminEditProduct;
+        window.promptDeleteAdminProduct = promptDeleteAdminProduct;
+        window.closeAdminDeleteModal = closeAdminDeleteModal;
+        window.confirmDeleteAdminProduct = confirmDeleteAdminProduct;
+        window.changeCardImage = changeCardImage;
+        window.openProductModal = openProductModal;
+        window.closeProductModal = closeProductModal;
+        window.modalNextImage = modalNextImage;
+        window.modalPrevImage = modalPrevImage;
+        window.setModalImageIndex = setModalImageIndex;
+
         window.addEventListener('DOMContentLoaded', () => {
-            loadCustomCategories();
-            loadProductsFromStorage();
-            populateCategoryDropdowns();
-            renderCategoryFilterButtons();
-            renderFeaturedProducts();
-            renderCatalogProducts();
-            renderAdminProductsList();
-            renderAdminImagePreviews();
+            initFirebaseAndSync();
 
             if (window.location.hash === '#Hider') {
                 switchTab('admin');
